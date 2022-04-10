@@ -34,11 +34,11 @@ $ clibrowz
 
 ## Philosophy
 
-We use the command line because it enables -- among other things -- more efficient workflows than using a mouse and windows. It also lets us focus on our *tasks* while not making us context switch between various software packages. Instead, we simply string together a flow of command line tools without ever having to leave the shell.
+We use the command line because it enables -- among other things -- more efficient workflows than using a mouse and windows. It lets us focus on our *tasks* while not making us context switch between various software packages. Instead, we simply string together a flow of command line tools without ever having to leave the shell.
 
 But one task that still takes us away from that flow is the information-gathering we do in web browsers such as Chrome or Safari. This forces us out of the terminal and into the GUI, yucking our yum.
 
-So why not use a terminal-based browser such as Lynx? Because we may want a more visually-rich web view for providing easier consumption and context. Or perhaps you are a web developer who needs to see visually how things render graphically.
+So why not use a terminal-based browser such as Lynx? Because we may want a more visually-rich web view for providing easier consumption and context. Or perhaps you're a web developer who needs to see visually how things render graphically.
 
 ## Solution
 
@@ -63,12 +63,12 @@ Assuming you have the above installed, giving the `clibrowz` file execute permis
 
 ### Commands (Implemented)
 
-Go to any URL and display the page with numerically-labeled links:
+Display any web page:
 ```
 clibrowz http://yahoo.com
 ```
 
-Follow a link by label:
+Follow a link by its numeric label:
 ```
 clibrowz 123
 ```
@@ -80,17 +80,22 @@ Re-display the current page:
 clibrowz
 ```
 
-Display more of the current page (aka "below the fold")
+Display more of the current page (similar to "scrolling below the fold")
 ```
-clibrowz M
+clibrowz j // or J (vim-inspired)
+```
+
+Display more of the current page (similar to "scrolling back up")
+```
+clibrowz k // or K
 ```
 
 Go backward or forward in history
 ```
-clibrowz <
+clibrowz h // or H or >
 ```
 ```
-clibrowz >
+clibrowz l // or L or <
 ```
 
 ### Flags (Planned)
@@ -129,3 +134,8 @@ Flags can be combined with link labels. For example, this will display link 21
 ```
 clibrowz 21  -ln
 ```
+
+### FAQs
+
+#### Q: Where does clibrowz store its data?
+A: In your `/tmp/' directory
