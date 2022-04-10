@@ -1,2 +1,3 @@
 selenium >= 4.1.3
 viu >= 1.4.0
+kitty >= 0.24.4
