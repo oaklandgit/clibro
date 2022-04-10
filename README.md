@@ -12,7 +12,6 @@ Display a web page as an inline image in the terminal:
 ```
 $ clibro http://wikipedia.com
 ```
-Output:
 ![Screenshot of a clibro page by URL](/screenshots/clibro-by-url.png)
 
 Notice the image has numeric labels representing each link, which can be used to browse:
@@ -20,7 +19,6 @@ Notice the image has numeric labels representing each link, which can be used to
 ```
 $ clibro 5
 ```
-Output:
 ![Screenshot of a clibro page by label](/screenshots/clibro-by-label.png)
 
 `clibro 5` means "take me to the link labeled `5` from the last clibro call." In this example, link 5 is the French home page for Wikipedia.
