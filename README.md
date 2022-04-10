@@ -13,7 +13,7 @@ Display a web page as an inline image in the terminal:
 $ clibro http://yahoo.com
 ```
 Output:
-> ![Example of a clibrowz page](example-image-01.png)
+> ![Screenshot of a clibro page by URL](/screenshots/clibro-by-url.png)
 > $
 
 Notice the image has numeric labels representing each link, which can be used to browse:
