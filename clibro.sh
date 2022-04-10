@@ -72,8 +72,14 @@ def displayPage(url):
     file.write(json_data)
     file.close()
 
+    # display the url
+    print(f"\n{url}\n")
+
     # display the image
     out = subprocess.call(f"viu -w {config['image_cols']} {config['tmp_img']}", shell=True)
+    
+    # line break
+    print("\n") 
 
 # is it a link code or a new url?
 if arg.isnumeric() and exists(config['tmp_data']):
