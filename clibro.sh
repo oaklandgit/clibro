@@ -49,23 +49,23 @@ def display_page(url):
     for index, value in enumerate(links):
 
         # label image
-        x = value.location['x']
-        y = value.location['y'] - 12
+        link_x = value.location['x']
+        link_y = value.location['y'] - 12
         i = str(index)
         # white border
-        editable.text((x-1, y), i, (255,255,255), font=fnt)
-        editable.text((x+1, y), i, (255,255,255), font=fnt)
-        editable.text((x, y-1), i, (255,255,255), font=fnt)
-        editable.text((x, y+1), i, (255,255,255), font=fnt)
+        editable.text((link_x-1, link_y), i, (255,255,255), font=fnt)
+        editable.text((link_x+1, link_y), i, (255,255,255), font=fnt)
+        editable.text((link_x, link_y-1), i, (255,255,255), font=fnt)
+        editable.text((link_x, link_y+1), i, (255,255,255), font=fnt)
         # label
-        editable.text((x, y), i, config['label_color'], font=fnt)
+        editable.text((link_x, link_y), i, config['label_color'], font=fnt)
 
         # build json
         data.append({
             'title': value.text,
             'url': value.get_attribute('href'),
-            'x': x,
-            'y': y,
+            'x': link_x,
+            'y': link_y,
         })
 
     img.save(config['tmp_img'])
