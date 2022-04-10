@@ -19,8 +19,9 @@ driver = webdriver.Chrome(options=chrome_options)
 config = {
     'tmp_img': '/tmp/clibro-img.png',
     'tmp_data': '/tmp/clibro-data.json',
-    'width': 960,
-    'fold': 450 
+    'image_cols': 80,
+    'browser_width': 940,
+    'browser_fold': 450 
 }
 
 # get argument
@@ -29,7 +30,7 @@ arg = sys.argv[1]
 
 def displayPage(url):
     driver.get(url)
-    driver.set_window_size(config['width'], config['fold'])
+    driver.set_window_size(config['browser_width'], config['browser_fold'])
     driver.find_element(by=By.TAG_NAME, value='body').screenshot(config['tmp_img'])
 
     # gather links
@@ -66,7 +67,7 @@ def displayPage(url):
     file.close()
 
     # display the image
-    out = subprocess.call('viu ' + config['tmp_img'], shell=True)
+    out = subprocess.call(f"viu -w {config['image_cols']} {config['tmp_img']}", shell=True)
 
 # is it a link code or a new url?
 if arg.isnumeric() and exists(config['tmp_data']):
