@@ -59,7 +59,16 @@ Clibro leverages the following packages:
 
 ## Installation
 
-Assuming you have the above installed, giving the `clibro` file execute permissions and creating an alias will allow you to use the tool regardless of what directory you happen to be in.
+1. Make sure you have the above requirements
+2. Place `clibro.sh` into `/user/local/bin` (or wherever you keep your shell scripts)
+3. Make sure `clibro.sh` has execute permission:
+```
+chmod +x clibro.sh
+```
+4. Create an alias for your terminal. In kitty it would be:
+```
+alias clibro="/usr/local/bin/clibro.sh"
+```
 
 ### Commands (Implemented)
 
