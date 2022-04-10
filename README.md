@@ -19,14 +19,28 @@ CliBrowse aims to be a CLI too that:
 2. Keeps you focused on whatever workflow you're in -- the browser is coming to your command line, not vice versa
 3. Provides more visual context than text-only browsers like Lynx.
 
+## Requirements
+
+1. [Python3](https://www.python.org/downloads/)
+2. [Selenium](https://selenium-python.readthedocs.io/installation.html) and [Chromedriver](https://chromedriver.chromium.org/getting-started) for Python: allows the tool to interact with web pages
+3. [Viu](https://github.com/atanunq/viu): a command line tool for viewing graphical images in the terminal)
+4. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
+
+## Installation
+
+Assuming you have the above installed, giving the `clibrowz` file execute permissions and creating an alias will allow you to use the tool regardless of what directory you happen to be in.
+
 ## Usage 
 
 (Requires kitty or similar terminal that enables inline graphics.)
 
-Display a web page as an inline image in the terminal
+Display a web page as an inline image in the terminal. You'll notice the image has numeric labels representing each link. Example:
 ```
-$ clib google.com
+$ clibrowz http://yahoo.com
 ```
+
+
+
 
 The page will be displayed with a graphic overlay of letters corresponding to all links. Clib remembers the last page visited to enable subsequent interactions, whether or not you use other non-CliBrowse commands.
 
