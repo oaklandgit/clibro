@@ -139,3 +139,6 @@ clibro 21  -ln
 
 #### Q: Where does clibro store its data?
 A: In your `/tmp/' directory
+
+#### Q: What's behind the name "Clibro?"
+A: It's a portmanteau of CLI and "Browser." And also, it's your command-line's "bro." 😉
