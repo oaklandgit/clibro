@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
+"""A CLI web browser that doesn't move focus away from your current tasks."""
 
+import subprocess
+import sys
+import json
+from os.path import exists
+import validators
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from PIL import Image, ImageFont, ImageDraw
-import subprocess
-import sys
-import json
-import validators
-from os.path import exists
- 
+
 chrome_options = Options()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
@@ -29,7 +30,8 @@ config = {
 arg = sys.argv[1]
 
 
-def displayPage(url):
+def display_page(url):
+    '''Takes in a url, outputs a screenshot of that page in a supported terminal.'''
     driver.get(url)
     driver.set_window_size(config['browser_width'], config['browser_fold'])
     driver.find_element(by=By.TAG_NAME, value='body').screenshot(config['tmp_img'])
@@ -37,7 +39,7 @@ def displayPage(url):
     # gather links
     links = driver.find_elements(By.TAG_NAME, 'a')
 
-    # prepare to label the image 
+    # prepare to label the image
     img = Image.open(config['tmp_img'])
     fnt = ImageFont.load_default()
 
@@ -45,7 +47,7 @@ def displayPage(url):
 
     # label image and create json
     for index, value in enumerate(links):
-        
+
         # label image
         x = value.location['x']
         y = value.location['y'] - 12
@@ -67,28 +69,28 @@ def displayPage(url):
         })
 
     img.save(config['tmp_img'])
-    file = open(config['tmp_data'],'w')
-    json_data = json.dumps(data, indent=4)    
-    file.write(json_data)
-    file.close()
+
+    json_data = json.dumps(data, indent=4)
+    with open(config['tmp_data'], 'w', encoding='utf8') as write_file:
+        write_file.write(json_data)
 
     # display the url
     print(f"\n{url}\n")
 
     # display the image
-    out = subprocess.call(f"viu -w {config['image_cols']} {config['tmp_img']}", shell=True)
-    
+    subprocess.call(f"viu -w {config['image_cols']} {config['tmp_img']}", shell=True)
+
     # line break
-    print("\n") 
+    print("\n")
 
 # is it a link code or a new url?
 if arg.isnumeric() and exists(config['tmp_data']):
-    file = open(config['tmp_data'], 'r')
-    data = json.load(file)
-    displayPage(data[int(arg)]['url'])
+    with open(config['tmp_data'], 'r', encoding='utf8') as read_file:
+        data = json.load(read_file)
+    display_page(data[int(arg)]['url'])
 
 elif validators.url(arg):
     data = []
-    displayPage(arg)
+    display_page(arg)
 else:
     print('Usage notes…')
