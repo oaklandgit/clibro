@@ -22,7 +22,7 @@ Notice the image has numeric labels representing each link, which can be used to
 $ clibrowz 21
 ```
 
-`clibrowz 21` means "take me to the link labeled `12` from the last clibrowz call. In this example, link 21 is yahoo news.
+`clibrowz 21` means "take me to the link labeled `21` from the last clibrowz call." In this example, link 21 is yahoo news.
 
 Also notice that after each command, you're back in the shell prompt. You could continue browsing, or you could continue with other work in the terminal. Clibrowz will remember the last-visited page and all its links.
 
