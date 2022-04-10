@@ -20,7 +20,7 @@ config = {
     'tmp_img': '/tmp/clibro-img.png',
     'tmp_data': '/tmp/clibro-data.json',
     'width': 960,
-    'fold': 1200
+    'fold': 450 
 }
 
 # get argument
