@@ -135,7 +135,13 @@ Flags can be combined with link labels. For example, this will display link 21
 clibro 21  -ln
 ```
 
-### FAQs
+## FAQs
 
-#### Q: Where does clibro store its data?
+### Q: Where does clibro store its data?
 A: In your `/tmp/' directory
+
+### Q: What's behind the name "Clibro?"
+A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." 😉
+
+### Q: This looks hella useful! Can I contribute?
+A: Yes, please! Here's the [issues backlog](https://github.com/oaklandgit/clibro/issues).
