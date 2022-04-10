@@ -21,7 +21,8 @@ config = {
     'tmp_data': '/tmp/clibro-data.json',
     'image_cols': 80,
     'browser_width': 940,
-    'browser_fold': 450 
+    'browser_fold': 600,
+    'label_color': (255, 0, 255) #magenta
 }
 
 # get argument
@@ -49,8 +50,13 @@ def displayPage(url):
         x = value.location['x']
         y = value.location['y'] - 12
         i = str(index)
-        editable.text((x+3, y+3), i, (255,255,255), font=fnt)
-        editable.text((x, y), i, (0,0,0), font=fnt)
+        # white border
+        editable.text((x-1, y), i, (255,255,255), font=fnt)
+        editable.text((x+1, y), i, (255,255,255), font=fnt)
+        editable.text((x, y-1), i, (255,255,255), font=fnt)
+        editable.text((x, y+1), i, (255,255,255), font=fnt)
+        # label
+        editable.text((x, y), i, config['label_color'], font=fnt)
 
         # build json
         data.append({
