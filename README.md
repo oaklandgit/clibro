@@ -10,19 +10,20 @@ $ clibro <destination> [flags]
 Display a web page as an inline image in the terminal:
 
 ```
-$ clibro http://yahoo.com
+$ clibro http://wikipedia.com
 ```
 Output:
-> ![Screenshot of a clibro page by URL](/screenshots/clibro-by-url.png)
-> $
+![Screenshot of a clibro page by URL](/screenshots/clibro-by-url.png)
 
 Notice the image has numeric labels representing each link, which can be used to browse:
 
 ```
-$ clibro 21
+$ clibro 5
 ```
+Output:
+![Screenshot of a clibro page by label](/screenshots/clibro-by-label.png)
 
-`clibro 21` means "take me to the link labeled `21` from the last clibro call." In this example, link 21 is yahoo news.
+`clibro 5` means "take me to the link labeled `5` from the last clibro call." In this example, link 5 is the French home page for Wikipedia.
 
 Also notice that after each command, you're back in the shell prompt. You could continue browsing, or you could continue with other work in the terminal. Clibro will remember the last-visited page and all its links.
 
@@ -74,12 +75,12 @@ alias clibro="/usr/local/bin/clibro.sh"
 
 Display any web page:
 ```
-clibro http://yahoo.com
+clibro http://apple.com
 ```
 
 Follow a link by its numeric label:
 ```
-clibro 123
+clibro 35
 ```
 
 ### Commands (Planned)
@@ -111,27 +112,27 @@ clibro l // or L or <
 
 Override the default width of the page.
 ```
-clibro http://yahoo.com --width 1200 // or -w 1200
+clibro http://replit.com --width 1200 // or -w 1200
 ```
 
 Override the default height of the "fold" (how much of the page viewport is shown):
 ```
-clibro http://yahoo.com --height 500 // or -h 500
+clibro http://python.org --height 500 // or -h 500
 ```
 
 Display without link labels:
 ```
-clibro http://yahoo.com --no-labels // or -n
+clibro http://python.org --no-labels // or -n
 ```
 
 Also display a text-based, ordered list of all the links:
 ```
-clibro http://yahoo.com --list-links // or -l
+clibro http://python.org --list-links // or -l
 ```
 
 Single-character flags can be combined. Display without link labels but with a text-based list of links:
 ```
-clibro http://yahoo.com  -ln
+clibro http://python.org  -ln
 ```
 
 Flags can be used with or without a url. For example, this will redisplay the most-recently-visited page in a narrower viewport (perhaps you wanted to see how it looks on a mobile device):
