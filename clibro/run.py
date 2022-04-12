@@ -28,9 +28,13 @@ url=route_request(
     links_file=config['tmp_data']
 )
 
+if url==False:
+    print("\nNo history found. Please provide a URL.\n")
+    parser.print_help()
+    quit()
+
 display_page(
     url=url,
-    #data=link_data,
     width=args.browser_width,
     fold=args.browser_fold,
     zoom=args.image_zoom,

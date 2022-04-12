@@ -5,7 +5,7 @@ from os.path import exists
 def route_request(dest, history_file, links_file):
     '''Takes the user-supplied destination and figures out where to go'''
     
-    # if no destination provide, we're doing something with the last URL
+    # if no destination provided, fetch the last URL from history 
     if dest == False and exists(history_file):
         with open(history_file, 'r', encoding='utf8') as read_file:
             for url in read_file:
@@ -14,8 +14,7 @@ def route_request(dest, history_file, links_file):
 
     # if no destination provided and not history, error out
     if dest == False:
-        print("No browse history found. Please supply a URL.\n")
-        quit()
+        return False
 
     # if a number is provided, we're following a link
     if dest.isnumeric() and exists(links_file):
