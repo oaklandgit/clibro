@@ -1,17 +1,9 @@
 """A CLI web browser that doesn't move focus away from your current tasks."""
 
 import argparse
-import math
-import subprocess
-import sys
 import json
 from os.path import exists
 import validators
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from PIL import Image, ImageFont, ImageDraw
-
 from display import display_page
 
 config={
@@ -20,7 +12,6 @@ config={
     'font':'Arial.ttf'
 }
 
-# set up argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument("dest", type=str, help="URL to open or link to follow")
 parser.add_argument("-w", "--browser-width", default=1200, help="The browser width")
