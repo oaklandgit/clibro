@@ -42,7 +42,6 @@ def display_page(
     img = Image.open(img_path)
     # fnt = ImageFont.load_default()
     fnt = ImageFont.truetype(font, size) 
-    print(font)
     editable = ImageDraw.Draw(img)
 
     # label image and create json
