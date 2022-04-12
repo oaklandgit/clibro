@@ -85,17 +85,17 @@ clibro 35
 
 Override the default width of the page.
 ```
-clibro http://replit.com --width 1200 // or -w 1200
+clibro http://replit.com --browser-width 1200 // or -w 1200
 ```
 
 Override the default height of the "fold" (how much of the page viewport is shown):
 ```
-clibro http://python.org --fold 500 // or -f 500
+clibro http://python.org --browser-fold 500 // or -f 500
 ```
 
 Adjust the zoom percentage of the image that outputs to the terminal:
 ```
-clibro http://python.org --zoom 50 // or -z 50
+clibro http://python.org --image-zoom 50 // or -z 50
 ```
 
 ### TO DO

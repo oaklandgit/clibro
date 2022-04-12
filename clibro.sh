@@ -20,17 +20,22 @@ driver = webdriver.Chrome(options=chrome_options)
 config = {
     'tmp_img': '/tmp/clibro-img.png',
     'tmp_data': '/tmp/clibro-data.json',
+    'label_font': 'Overpass-Black.ttf',
     'label_color': (255, 0, 255) #magenta
 }
 
 # set up argument parser
 parser = argparse.ArgumentParser()
 parser.add_argument("dest", type=str, help="URL to open or link to follow")
-parser.add_argument("-w", "--width", default=940, help="The browser width")
-parser.add_argument("-f", "--fold", default=600, help="The amount of page to show")
-parser.add_argument("-z", "--zoom", default=100, help="Reduce or englarge the imag")
+parser.add_argument("-w", "--browser-width", default=1200, help="The browser width")
+parser.add_argument("-f", "--browser-fold", default=800, help="The amount of page to show")
+parser.add_argument("-z", "--image-zoom", default=100, help="Reduce or englarge the image")
+parser.add_argument("-s", "--label-size", type=int, default=22, help="Customize label size")
+parser.add_argument("-x", "--label-offset-x", type=int, default=-22, help="X offset of the labels")
+parser.add_argument("-y", "--label-offset-y", type=int, default=-22, help="Y offset of the labels")
 
 args = parser.parse_args()
+
 dest = args.dest
 
 def display_page(url):
@@ -40,7 +45,7 @@ def display_page(url):
     print(f"\nLoading {url}\n")
 
     driver.get(url)
-    driver.set_window_size(args.width, args.fold)
+    driver.set_window_size(args.browser_width, args.browser_fold)
     driver.find_element(by=By.TAG_NAME, value='body').screenshot(config['tmp_img'])
 
     # gather links
@@ -48,7 +53,8 @@ def display_page(url):
 
     # prepare to label the image
     img = Image.open(config['tmp_img'])
-    fnt = ImageFont.load_default()
+    # fnt = ImageFont.load_default()
+    fnt = ImageFont.truetype(config['label_font'], args.label_size) 
 
     editable = ImageDraw.Draw(img)
 
@@ -56,14 +62,16 @@ def display_page(url):
     for index, value in enumerate(links):
 
         # label image
-        link_x = value.location['x']
-        link_y = value.location['y'] - 12
+        link_x = value.location['x'] + args.label_offset_x
+        link_y = value.location['y'] + args.label_offset_y
         i = str(index)
         # white border
-        editable.text((link_x-1, link_y), i, (255,255,255), font=fnt)
-        editable.text((link_x+1, link_y), i, (255,255,255), font=fnt)
-        editable.text((link_x, link_y-1), i, (255,255,255), font=fnt)
-        editable.text((link_x, link_y+1), i, (255,255,255), font=fnt)
+        
+        offset=args.label_size//8
+        editable.text((link_x-offset, link_y), i, (255,255,255), font=fnt)
+        editable.text((link_x+offset, link_y), i, (255,255,255), font=fnt)
+        editable.text((link_x, link_y-offset), i, (255,255,255), font=fnt)
+        editable.text((link_x, link_y+offset), i, (255,255,255), font=fnt)
         # label
         editable.text((link_x, link_y), i, config['label_color'], font=fnt)
 
@@ -83,7 +91,7 @@ def display_page(url):
 
 
     # display the image
-    subprocess.call(f"viu -w {math.floor(80.0 * float(args.zoom) * 0.01)} {config['tmp_img']}", shell=True)
+    subprocess.call(f"viu -w {math.floor(80.0 * float(args.image_zoom) * 0.01)} {config['tmp_img']}", shell=True)
 
     # line break
     print("\n")
