@@ -12,7 +12,7 @@ def route_request(dest, history_file, links_file):
                 pass
             return url
 
-    # if no destination provided and not history, error out
+    # if no destination provided and there's no browse history, return false
     if dest == False:
         return False
 
@@ -27,7 +27,6 @@ def route_request(dest, history_file, links_file):
     
     # if a url is provided, we're going to it
     if validators.url(dest):
-        #link_data=[]
         with open(history_file, 'a', encoding='utf8') as write_file:
             write_file.write(f"{dest}\n")
         return dest

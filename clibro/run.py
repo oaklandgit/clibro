@@ -29,8 +29,9 @@ url=route_request(
 )
 
 if url==False:
-    print("\nNo history found. Please provide a URL.\n")
+    print("\nNo Clibro browse history found. Please provide a URL.\n")
     parser.print_help()
+    print("\n")
     quit()
 
 display_page(
