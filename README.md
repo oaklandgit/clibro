@@ -59,14 +59,9 @@ Clibro leverages the following packages:
 ## Installation
 
 1. Make sure you have the above requirements
-2. Place `clibro.sh` into `/user/local/bin` (or wherever you keep your shell scripts)
-3. Make sure `clibro.sh` has execute permission:
+2. Place the `clibro` directory wherever you want it and create an alias in your shell, e.g.
 ```
-chmod +x clibro.sh
-```
-4. Create an alias for your terminal. In kitty it would be:
-```
-alias clibro="/usr/local/bin/clibro.sh"
+alias clibro="/path/to/clibro/run.py"
 ```
 
 ## CLI Arguments
@@ -153,8 +148,8 @@ clibro 21  -ln
 ### Q: Where does clibro store its data?
 A: In your `/tmp/` directory
 
-### Q: What's behind the name "Clibro?"
-A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." 😉
-
 ### Q: This looks hella useful! Can I contribute?
 A: Yes, please! Here's the [issues backlog](https://github.com/oaklandgit/clibro/issues).
+
+### Q: What's behind the name "Clibro?"
+A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." 😉
