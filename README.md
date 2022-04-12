@@ -69,7 +69,9 @@ chmod +x clibro.sh
 alias clibro="/usr/local/bin/clibro.sh"
 ```
 
-### Commands (Implemented)
+## CLI Arguments
+
+### Implemented
 
 Display any web page:
 ```
@@ -81,7 +83,22 @@ Follow a link by its numeric label:
 clibro 35
 ```
 
-### Commands (Planned)
+Override the default width of the page.
+```
+clibro http://replit.com --width 1200 // or -w 1200
+```
+
+Override the default height of the "fold" (how much of the page viewport is shown):
+```
+clibro http://python.org --fold 500 // or -f 500
+```
+
+Adjust the zoom percentage of the image that outputs to the terminal:
+```
+clibro http://python.org --zoom 50 // or -z 50
+```
+
+### TO DO
 
 Re-display the current page:
 ```
@@ -104,18 +121,6 @@ clibro h // or H or >
 ```
 ```
 clibro l // or L or <
-```
-
-### Flags (Planned)
-
-Override the default width of the page.
-```
-clibro http://replit.com --width 1200 // or -w 1200
-```
-
-Override the default height of the "fold" (how much of the page viewport is shown):
-```
-clibro http://python.org --height 500 // or -h 500
 ```
 
 Display without link labels:
