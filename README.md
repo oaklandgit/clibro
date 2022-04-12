@@ -99,6 +99,10 @@ You can also add flags to re-render the last-visited page as needed. For example
 ```
 clibro -w 420
 ```
+Help
+```
+clibro --help // or -h
+```
 
 ## Not yet implemented
 
