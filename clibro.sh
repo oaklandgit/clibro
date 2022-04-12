@@ -14,17 +14,12 @@ from selenium.webdriver.common.by import By
 from PIL import Image, ImageFont, ImageDraw
 
 chrome_options = Options()
-#chrome_options.add_argument('--no-sandbox')
-#chrome_options.add_argument('--disable-dev-shm-usage')
 chrome_options.add_argument('--headless')
 driver = webdriver.Chrome(options=chrome_options)
 
 config = {
     'tmp_img': '/tmp/clibro-img.png',
     'tmp_data': '/tmp/clibro-data.json',
-    'image_cols': 80,
-#    'browser_width': 940,
-#    'browser_fold': 600,
     'label_color': (255, 0, 255) #magenta
 }
 
