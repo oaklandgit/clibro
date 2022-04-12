@@ -66,39 +66,41 @@ alias clibro="python3 /path/to/clibro/run.py"
 
 ## CLI Arguments
 
-### Implemented
-
-Display any web page:
+Display any web page
 ```
 clibro http://apple.com
 ```
 
-Follow a link by its numeric label:
+Follow a link by its numeric label
 ```
 clibro 35
 ```
 
-Override the default width of the page.
+Override the default width of the page
 ```
 clibro http://replit.com --browser-width 1200 // or -w 1200
 ```
 
-Override the default height of the "fold" (how much of the page viewport is shown):
+Override the default height of the "fold" (how much of the page viewport is shown)
 ```
 clibro http://python.org --browser-fold 500 // or -f 500
 ```
 
-Adjust the zoom percentage of the image that outputs to the terminal:
+Adjust the zoom percentage of the image that outputs to the terminal
 ```
 clibro http://python.org --image-zoom 50 // or -z 50
 ```
 
-### TO DO
-
-Re-display the current page:
+Re-display the most-recently-visited page. Clibro maintains the browse history in `/tmp/clibro.txt`
 ```
 clibro
 ```
+You can also add flags to re-render the last-visited page as needed. For example, this will redisplay the most-recently-visited page in a narrower viewport (perhaps you wanted to see how it looks on a mobile device)
+```
+clibro -w 420
+```
+
+## Not yet implemented
 
 Display more of the current page (similar to "scrolling below the fold")
 ```
@@ -118,7 +120,7 @@ clibro h // or H or >
 clibro l // or L or <
 ```
 
-Display without link labels:
+Display without link labels
 ```
 clibro http://python.org --no-labels // or -n
 ```
@@ -126,16 +128,6 @@ clibro http://python.org --no-labels // or -n
 Also display a text-based, ordered list of all the links:
 ```
 clibro http://python.org --list-links // or -l
-```
-
-Single-character flags can be combined. Display without link labels but with a text-based list of links:
-```
-clibro http://python.org  -ln
-```
-
-Flags can be used with or without a url. For example, this will redisplay the most-recently-visited page in a narrower viewport (perhaps you wanted to see how it looks on a mobile device):
-```
-clibro -w 420
 ```
 
 Flags can be combined with link labels. For example, this will display link 21 
