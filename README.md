@@ -61,7 +61,7 @@ Clibro leverages the following packages:
 1. Make sure you have the above requirements
 2. Place the `clibro` directory wherever you want it and create an alias in your shell, e.g.
 ```
-alias clibro="/path/to/clibro/run.py"
+alias clibro="python3 /path/to/clibro/run.py"
 ```
 
 ## CLI Arguments
