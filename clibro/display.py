@@ -12,7 +12,6 @@ def display_page(
         url,
         img_path,
         data_path,
-        data,
         width,
         fold,
         zoom,
@@ -37,10 +36,10 @@ def display_page(
 
     # gather links
     links = driver.find_elements(By.TAG_NAME, 'a')
+    data=[]
 
     # prepare to label the image
     img = Image.open(img_path)
-    # fnt = ImageFont.load_default()
     fnt = ImageFont.truetype(font, size) 
     editable = ImageDraw.Draw(img)
 
