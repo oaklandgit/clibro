@@ -106,22 +106,22 @@ bro --help // or -h
 
 ## Not yet implemented
 
-Display more of the current page (similar to "scrolling below the fold")
+Display more of the current page (similar to "scrolling DOWN below the fold")
 ```
-bro j // or J (vim-inspired)
+bro D
 ```
 
-Display more of the current page (similar to "scrolling back up")
+Display more of the current page (similar to "scrolling UP")
 ```
-bro k // or K
+bro U
 ```
 
 Go backward or forward in history
 ```
-bro h // or H or >
+bro B
 ```
 ```
-bro l // or L or <
+bro F 
 ```
 
 Display without link labels
@@ -132,11 +132,6 @@ bro http://python.org --no-labels // or -n
 Also display a text-based, ordered list of all the links:
 ```
 bro http://python.org --list-links // or -l
-```
-
-Flags can be combined with link labels. For example, this will display link 21 
-```
-bro 21  -ln
 ```
 
 ## FAQs
