@@ -1,6 +1,5 @@
 import math
 import subprocess
-import sys
 import json
 from os.path import exists
 from selenium import webdriver
@@ -13,6 +12,7 @@ def display_page(
         img_path,
         data_path,
         width,
+        position,
         fold,
         zoom,
         size,
@@ -32,6 +32,7 @@ def display_page(
 
     driver.get(url)
     driver.set_window_size(width, fold)
+    driver.execute_script(f"window.scrollTo(0, {position*fold})") 
     driver.find_element(by=By.TAG_NAME, value='body').screenshot(img_path)
 
     # gather links

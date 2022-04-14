@@ -3,6 +3,7 @@
 import argparse
 from route import route_request
 from display import display_page
+from history import write_history
 
 config={
     'tmp_history': '/tmp/clibro.txt',
@@ -22,7 +23,7 @@ parser.add_argument("-y", "--label-offset-y", type=int, default=-22, help="Y off
 
 args=parser.parse_args()
 
-url=route_request(
+url,position=route_request(
     dest=args.destination,
     history_file=config['tmp_history'],
     links_file=config['tmp_data']
@@ -37,6 +38,7 @@ if url==False:
 display_page(
     url=url,
     width=args.browser_width,
+    position=position, 
     fold=args.browser_fold,
     zoom=args.image_zoom,
     size=args.label_size,
@@ -46,4 +48,10 @@ display_page(
     data_path=config['tmp_data'],
     font=config['font'],
     color=(255, 0, 255)
+)
+
+write_history(
+    url=url,
+    position=position,
+    file=config['tmp_history']
 )
