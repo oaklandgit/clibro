@@ -1,11 +1,18 @@
 # Clibro
-A CLI web browser that doesn't move your focus (or hands) away from your current non-browser task.
 
 ## Basic Usage
 
 ```
-$ bro <destination> [flags]
+$ bro [destination]
 ```
+
+The destination can be:
+
+1. a URL
+2. a numerically-labeled link from the previously-displayed URL
+3. a scroll direction (U = up, D = down)
+
+## Examples
 
 Display a web page as an inline image in the terminal:
 
@@ -53,7 +60,7 @@ Clibro leverages the following packages:
 
 1. [Python3](https://www.python.org/downloads/)
 2. [Selenium](https://selenium-python.readthedocs.io/installation.html) and [Chromedriver](https://chromedriver.chromium.org/getting-started) for Python: allows the tool to interact with web pages
-3. [Viu](https://github.com/atanunq/viu): a command line tool for viewing graphical images in the terminal)
+3. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals.
 4. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
 
 ## Installation
