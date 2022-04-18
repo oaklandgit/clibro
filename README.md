@@ -111,8 +111,6 @@ Help
 bro --help // or -h
 ```
 
-## Not yet implemented
-
 Display more of the current page (similar to "scrolling DOWN below the fold")
 ```
 bro D
@@ -122,6 +120,8 @@ Display more of the current page (similar to "scrolling UP")
 ```
 bro U
 ```
+
+## Not yet implemented
 
 Go backward or forward in history
 ```
