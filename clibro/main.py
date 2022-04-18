@@ -3,7 +3,9 @@
 import argparse
 import time
 import validators
-from history import store_location, lookup_location, store_links, get_links, lookup_link
+import json
+from urllib.parse import urlparse
+from history import store_location, lookup_location, store_links, lookup_link, get_links
 from browse import fetch_page
 from render import label_image, display_image
 
@@ -19,8 +21,12 @@ config={
     'links_path':'/tmp/clibro.json',
 }
 
-parser = argparse.ArgumentParser(prog='clibro')
-parser.add_argument("destination", nargs='?', default=False, type=str, help="URL to open or link to follow, or omit for last page visited")
+parser = argparse.ArgumentParser(
+        prog="bro",
+        description="A visual, asynchronous, CLI web browser that doesn't move focus away from your current tasks.",
+        epilog="Examples at https://github.com/oaklandgit/clibro"
+        )
+parser.add_argument("destination", nargs='?', default=False, type=str, help="A URL or U, D for scrolling up or down.")
 parser.add_argument("-w", "--browser-width", type=int, default=1200, help="The browser width")
 parser.add_argument("-f", "--browser-fold", type=int, default=800, help="The amount of page to show")
 parser.add_argument("-z", "--image-zoom", type=int, default=100, help="Reduce or englarge the image")
@@ -40,7 +46,7 @@ if not args.destination:
     finish()
 
 # scroll Down 
-elif args.destination == 'D':
+elif args.destination.lower() == 'd':
     url,pos=lookup_location(config['history_path'])
     print(f"Scrolling down {url}…")
     pos=int(pos)+1
@@ -49,7 +55,7 @@ elif args.destination == 'D':
     finish()
 
 # scroll Up
-elif args.destination == 'U':
+elif args.destination.lower() == 'u':
     url,pos=lookup_location(config['history_path']) 
     print(f"Scrolling up {url}…")
     pos=int(pos)-1
@@ -61,8 +67,12 @@ elif args.destination == 'U':
     finish()
 
 # if a url is provided, we're going to it
-elif validators.url(args.destination):
-    url=args.destination
+elif "." in args.destination:
+    if validators.url(args.destination):
+        url=args.destination
+    else:
+        url=f"http://{args.destination}"
+
     print(f"Loading {url}…")
     links=fetch_page(url, config['image_path'])
     store_links(links, config['links_path'])
@@ -83,4 +93,5 @@ elif args.destination.isnumeric():
     finish()
 
 else:
-    print("How'd I get here?")
+    print("\n")
+    parser.print_help()

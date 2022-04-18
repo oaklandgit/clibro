@@ -18,7 +18,6 @@ def label_image(args, links, img_path):
     img.save(img_path)
 
 def display_image(args, pos, img_path):
-    print(f"Position {pos}")
     
     img=Image.open(img_path)
 
