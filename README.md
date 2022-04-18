@@ -84,12 +84,12 @@ bro 35
 ```
 Display more of the current page (similar to "scrolling DOWN below the fold")
 ```
-bro D
+bro d
 ```
 
 Display more of the current page (similar to "scrolling UP")
 ```
-bro U
+bro u
 ```
 
 Override the default width of the page
