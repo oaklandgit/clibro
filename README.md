@@ -17,7 +17,7 @@ The destination can be:
 Display a web page as an inline image in the terminal:
 
 ```
-$ bro http://wikipedia.com
+$ bro wikipedia.com
 ```
 ![Screenshot of a Clibro page by URL](/screenshots/clibro-by-url.png)
 
@@ -75,27 +75,36 @@ alias bro="python3 /path/to/clibro/main.py"
 
 Display any web page
 ```
-bro http://apple.com
+bro apple.com
 ```
 
 Follow a link by its numeric label
 ```
 bro 35
 ```
+Display more of the current page (similar to "scrolling DOWN below the fold")
+```
+bro D
+```
+
+Display more of the current page (similar to "scrolling UP")
+```
+bro U
+```
 
 Override the default width of the page
 ```
-bro http://replit.com --browser-width 1200 // or -w 1200
+bro --browser-width 1200 // or -w 1200
 ```
 
 Override the default height of the "fold" (how much of the page viewport is shown)
 ```
-bro http://python.org --browser-fold 500 // or -f 500
+bro python.org --browser-fold 500 // or -f 500
 ```
 
 Adjust the zoom percentage of the image that outputs to the terminal
 ```
-bro http://python.org --image-zoom 50 // or -z 50
+bro --image-zoom 50 // or -z 50
 ```
 
 Re-display the most-recently-visited page. Clibro maintains the browse history in `/tmp/clibro.txt`
@@ -109,16 +118,6 @@ bro -w 420
 Help
 ```
 bro --help // or -h
-```
-
-Display more of the current page (similar to "scrolling DOWN below the fold")
-```
-bro D
-```
-
-Display more of the current page (similar to "scrolling UP")
-```
-bro U
 ```
 
 ## Not yet implemented
