@@ -60,7 +60,7 @@ Clibro leverages the following packages:
 
 1. [Python3](https://www.python.org/downloads/)
 2. [Selenium](https://selenium-python.readthedocs.io/installation.html) and [Chromedriver](https://chromedriver.chromium.org/getting-started) for Python: allows the tool to interact with web pages
-3. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals.
+3. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals
 4. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
 
 ## Installation
@@ -94,12 +94,12 @@ bro U
 
 Override the default width of the page
 ```
-bro --browser-width 1200 // or -w 1200
+bro -w 1200
 ```
 
 Override the default height of the "fold" (how much of the page viewport is shown)
 ```
-bro python.org --browser-fold 500 // or -f 500
+bro python.org -f 500
 ```
 
 Re-display the most-recently-visited page. Clibro maintains the browse history in `/tmp/clibro.txt`
@@ -112,7 +112,7 @@ bro -w 420
 ```
 Help
 ```
-bro --help // or -h
+bro -h
 ```
 
 ## Not yet implemented
