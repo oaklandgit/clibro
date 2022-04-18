@@ -12,7 +12,8 @@ from render import label_image, display_image
 start_time=time.time()
 
 def finish():
-    print(f"Completed in {time.time() - start_time}s")
+    duration="{:.2f}".format(time.time() - start_time)
+    print(f"Completed in {duration}s")
     quit()
 
 config={
@@ -24,9 +25,9 @@ config={
 parser = argparse.ArgumentParser(
         prog="bro",
         description="A visual, asynchronous, CLI web browser that doesn't move focus away from your current tasks.",
-        epilog="Examples at https://github.com/oaklandgit/clibro"
+        epilog="Example: Try 'bro python.org',  'bro D', and 'bro 108'."
         )
-parser.add_argument("destination", nargs='?', default=False, type=str, help="A URL or U, D for scrolling up or down.")
+parser.add_argument("destination", nargs='?', default=False, type=str, help="A URL, a numerically-labeled link, or U/D for scrolling up or down.")
 parser.add_argument("-w", "--browser-width", type=int, default=1200, help="The browser width")
 parser.add_argument("-f", "--browser-fold", type=int, default=600, help="The amount of page to show")
 parser.add_argument("-s", "--label-size", type=int, default=22, help="Customize label size")
