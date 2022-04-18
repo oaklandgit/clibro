@@ -102,11 +102,6 @@ Override the default height of the "fold" (how much of the page viewport is show
 bro python.org --browser-fold 500 // or -f 500
 ```
 
-Adjust the zoom percentage of the image that outputs to the terminal
-```
-bro --image-zoom 50 // or -z 50
-```
-
 Re-display the most-recently-visited page. Clibro maintains the browse history in `/tmp/clibro.txt`
 ```
 bro
