@@ -29,7 +29,9 @@ def fetch_page(url, img_path):
             'title': value.text,
             'url': value.get_attribute('href'),
             'x': value.location['x'],
-            'y': value.location['y']
+            'y': value.location['y'],
+            'width': value.rect['width'],
+            'height': value.rect['height']
         })
 
     # done with driver

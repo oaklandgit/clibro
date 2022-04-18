@@ -10,10 +10,12 @@ def label_image(args, links, img_path):
     editable=ImageDraw.Draw(img)
 
     for index, value in enumerate(links):
-        x = value['x'] + args.label_offset_x 
-        y = value['y'] + args.label_offset_y
         i = str(index)
-        editable.text((x, y), f"({i})", color, font=fnt)
+        label = f"{i}"
+        charWidth, charHeight = editable.textsize(label)
+        x = value['x'] + value['width']/2 - charWidth/2
+        y = value['y']
+        editable.text((x, y), label, color, font=fnt)
     
     img.save(img_path)
 
