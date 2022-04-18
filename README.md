@@ -17,18 +17,18 @@ The destination can be:
 Display a web page as an inline image in the terminal:
 
 ```
-$ bro wikipedia.com
+$ bro python.org
 ```
 ![Screenshot of a Clibro page by URL](/screenshots/clibro-by-url.png)
 
 Notice the image has numeric labels representing each link, which can be used to browse:
 
 ```
-$ bro 5
+$ bro 45
 ```
 ![Screenshot of a Clibro page by label](/screenshots/clibro-by-label.png)
 
-`bro 5` means "take me to the link labeled `5` from the last bro call." In this example, link 5 is the French home page for Wikipedia.
+`bro 45` means "take me to the link labeled `45` from the last bro call." In this example, we browsed this way to a Python doc we were needing.
 
 Also notice that after each command, you're back in the shell prompt. You could continue browsing, or you could continue with other work in the terminal. Clibro will remember the last-visited page and all its links.
 
