@@ -30,9 +30,7 @@ parser = argparse.ArgumentParser(
 parser.add_argument("destination", nargs='?', default=False, type=str, help="A URL, a numerically-labeled link, or U/D for scrolling up or down.")
 parser.add_argument("-w", "--browser-width", type=int, default=1200, help="The browser width")
 parser.add_argument("-f", "--browser-fold", type=int, default=600, help="The amount of page to show")
-parser.add_argument("-s", "--label-size", type=int, default=22, help="Customize label size")
-parser.add_argument("-x", "--label-offset-x", type=int, default=12, help="X offset of the labels")
-parser.add_argument("-y", "--label-offset-y", type=int, default=32, help="Y offset of the labels")
+parser.add_argument("-s", "--label-size", type=int, default=18, help="Customize label size")
 
 args=parser.parse_args()
 
