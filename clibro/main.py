@@ -3,9 +3,9 @@
 import argparse
 import time
 import validators
-from history import store_location, lookup_location, store_links, lookup_link
+from history import store_location, lookup_location, store_links, get_links, lookup_link
 from browse import fetch_page
-from render import crop_label_display
+from render import label_image, display_image
 
 start_time=time.time()
 
@@ -35,28 +35,27 @@ if not args.destination:
     url,pos=lookup_location(config['history_path'])
     print(f"Reloading {url}…")
     links=fetch_page(url, config['image_path'])
-    crop_label_display(pos, args, links, config['image_path'])
+    label_image(args, links, config['image_path'])
+    display_image(args, pos, config['image_path'])
     finish()
 
 # scroll Down 
 elif args.destination == 'D':
     url,pos=lookup_location(config['history_path'])
     print(f"Scrolling down {url}…")
-    links=fetch_page(url, config['image_path'])
     pos=int(pos)+1
     store_location(url, pos, config['history_path'])
-    crop_label_display(pos, args, links, config['image_path'])
+    display_image(args, pos, config['image_path'])
     finish()
 
 # scroll Up
 elif args.destination == 'U':
     url,pos=lookup_location(config['history_path']) 
     print(f"Scrolling up {url}…")
-    links=fetch_page(url, config['image_path'])
     pos=int(pos)-1
     if pos>=0:
-        crop_label_display(pos, args, links, config['image_path'])
         store_location(url, pos, config['history_path'])
+        display_image(args, pos, config['image_path'])
     else:
         print("You're already at the top of this page.")
     finish()
@@ -68,7 +67,8 @@ elif validators.url(args.destination):
     links=fetch_page(url, config['image_path'])
     store_links(links, config['links_path'])
     store_location(url, 0, config['history_path'])
-    crop_label_display(0, args, links, config['image_path'])
+    label_image(args, links, config['image_path'])
+    display_image(args, 0, config['image_path'])
     finish() 
 
 # by label number
@@ -78,7 +78,8 @@ elif args.destination.isnumeric():
     links=fetch_page(url, config['image_path'])
     store_links(links, config['links_path'])
     store_location(url, 0, config['history_path'])
-    crop_label_display(0, args, links, config['image_path'])
+    label_image(args, links, config['image_path'])
+    display_image(args, 0, config['image_path'])
     finish()
 
 else:

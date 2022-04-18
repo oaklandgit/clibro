@@ -34,6 +34,10 @@ def lookup_link(label, file):
         print(f"Link {label} not found.")
         quit()
 
+def get_links(file):
+    with open(file, 'r', encoding='utf8') as read_file:
+        return json.load(read_file)
+
 def store_links(links, file):
     '''Writes a link array to a json file'''
     json_data = json.dumps(links, indent=4)

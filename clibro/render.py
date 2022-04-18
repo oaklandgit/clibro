@@ -1,9 +1,8 @@
 from PIL import Image, ImageFont, ImageDraw
 from pixcat import Image as Pix 
 
-def crop_label_display(pos, args, links, img_path):
+def label_image(args, links, img_path):
     '''Prepare the screenshotted image for display'''
-    print(f"Position {pos}")
     img=Image.open(img_path)
     fnt=ImageFont.truetype('Arial.ttf', args.label_size)
     color=(255,0,255)
@@ -15,5 +14,19 @@ def crop_label_display(pos, args, links, img_path):
         y = value['y'] + args.label_offset_y
         i = str(index)
         editable.text((x, y), f"[{i}]", color, font=fnt)
+    
+    img.save(img_path)
 
-    Pix(img).fit_screen(enlarge=True).show(crop_h=args.browser_fold)
+def display_image(args, pos, img_path):
+    print(f"Position {pos}")
+    
+    img=Image.open(img_path)
+
+    left = 0
+    top = int(pos) * int(args.browser_fold)
+    right = img.size[0]
+    bottom = top + int(args.browser_fold)
+
+    cropped = img.crop((left, top, right, bottom))
+
+    Pix(cropped).show()
