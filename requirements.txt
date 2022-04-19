@@ -1,2 +1,4 @@
+python3
 selenium
+geckodriver
 pixcat
