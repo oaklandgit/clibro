@@ -1,4 +1,4 @@
-import json
+''' Functions for Clibro capturing web pages '''
 from time import sleep
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -18,13 +18,13 @@ def fetch_page(url, img_path):
     driver=connect()
     driver.get(url)
     sleep(0.25)
-    driver.save_full_page_screenshot(img_path) 
-    
+    driver.save_full_page_screenshot(img_path)
+
     # gather links
-    linkElements = driver.find_elements(By.TAG_NAME, 'a')
+    link_elements = driver.find_elements(By.TAG_NAME, 'a')
 
     links = []
-    for index, value in enumerate(linkElements):
+    for value in link_elements:
         links.append({
             'title': value.text,
             'url': value.get_attribute('href'),
@@ -36,5 +36,5 @@ def fetch_page(url, img_path):
 
     # done with driver
     driver.quit()
-   
-    return links 
+
+    return links

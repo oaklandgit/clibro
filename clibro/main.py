@@ -2,19 +2,19 @@
 
 import argparse
 import time
+import sys
 import validators
-import json
-from urllib.parse import urlparse
-from history import store_location, lookup_location, store_links, lookup_link, get_links
+from history import store_location, lookup_location, store_links, lookup_link
 from browse import fetch_page
 from render import label_image, display_image
 
 start_time=time.time()
 
 def finish():
-    duration="{:.2f}".format(time.time() - start_time)
+    '''Function to display time to complete the request'''
+    duration=f"{time.time()-start_time:.2f}"
     print(f"Completed in {duration}s")
-    quit()
+    sys.exit()
 
 config={
     'history_path': '/tmp/clibro.txt',
@@ -24,17 +24,24 @@ config={
 
 parser = argparse.ArgumentParser(
         prog="bro",
-        description="A visual, asynchronous, CLI web browser that doesn't move focus away from your current tasks.",
+        description="A visual, asynchronous, CLI web browser that doesn't move\
+        focus away from your current tasks.",
         epilog="Example: Try 'bro python.org',  'bro D', and 'bro 108'."
         )
-parser.add_argument("destination", nargs='?', default=False, type=str, help="A URL, a numerically-labeled link, or U/D for scrolling up or down.")
-parser.add_argument("-w", "--browser-width", type=int, default=1200, help="The browser width")
-parser.add_argument("-f", "--browser-fold", type=int, default=600, help="The amount of page to show")
-parser.add_argument("-s", "--label-size", type=int, default=18, help="Customize label size")
+parser.add_argument(
+        "destination", nargs='?', default=False,
+        type=str, help="A URL, a numerically-labeled link, or U/D for\
+        scrolling up or down.")
+parser.add_argument("-w", "--browser-width", type=int, default=1200,
+        help="The browser width")
+parser.add_argument("-f", "--browser-fold", type=int, default=600,
+        help="The amount of page to show")
+parser.add_argument("-s", "--label-size", type=int, default=18,
+        help="Customize label size")
 
 args=parser.parse_args()
 
-# no dest, so get last visited, no need to fetch links 
+# no dest, so get last visited, no need to fetch links
 if not args.destination:
     url,pos=lookup_location(config['history_path'])
     print(f"Reloading {url}")
@@ -43,7 +50,7 @@ if not args.destination:
     display_image(args, pos, config['image_path'])
     finish()
 
-# scroll Down 
+# scroll Down
 elif args.destination.lower() == 'd':
     url,pos=lookup_location(config['history_path'])
     print(f"Scrolling down {url}")
@@ -54,7 +61,7 @@ elif args.destination.lower() == 'd':
 
 # scroll Up
 elif args.destination.lower() == 'u':
-    url,pos=lookup_location(config['history_path']) 
+    url,pos=lookup_location(config['history_path'])
     print(f"Scrolling up {url}")
     pos=int(pos)-1
     if pos>=0:
@@ -77,7 +84,7 @@ elif "." in args.destination:
     store_location(url, 0, config['history_path'])
     label_image(args, links, config['image_path'])
     display_image(args, 0, config['image_path'])
-    finish() 
+    finish()
 
 # by label number
 elif args.destination.isnumeric():

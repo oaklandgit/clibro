@@ -1,4 +1,6 @@
+'''Functions for storing Clibro URLs visited and links found'''
 import json
+import sys
 from os.path import exists
 
 def confirm_history(file):
@@ -7,13 +9,14 @@ def confirm_history(file):
         return
 
     print("No browse history. Please provide a URL.")
-    quit()
+    sys.exit()
 
 def lookup_location(file):
     '''Returns an array with the most-recent history record'''
-    
+
     confirm_history(file)
 
+    line = None
     with open(file, 'r', encoding='utf8') as read_file:
         for line in read_file:
             pass
@@ -30,11 +33,12 @@ def lookup_link(label, file):
         link_data=json.load(read_file)
     try:
         return link_data[int(label)]['url']
-    except:
+    except: # pylint: disable=bare-except
         print(f"Link {label} not found.")
-        quit()
+        sys.exit()
 
 def get_links(file):
+    '''Gets most-recently stored links'''
     with open(file, 'r', encoding='utf8') as read_file:
         return json.load(read_file)
 
