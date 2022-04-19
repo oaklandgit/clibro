@@ -59,9 +59,10 @@ Clibro aims to be a CLI too that:
 Clibro leverages the following packages:
 
 1. [Python3](https://www.python.org/downloads/)
-2. [Selenium](https://selenium-python.readthedocs.io/installation.html) and [Chromedriver](https://chromedriver.chromium.org/getting-started) for Python: allows the tool to interact with web pages
-3. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals
-4. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
+2. [Selenium](https://selenium-python.readthedocs.io/installation.html) 
+3. [Firefox Gecko Driver](https://firefox-source-docs.mozilla.org/testing/geckodriver/index.html)
+4. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals
+5. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
 
 ## Installation
 
