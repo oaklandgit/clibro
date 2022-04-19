@@ -37,7 +37,7 @@ args=parser.parse_args()
 # no dest, so get last visited, no need to fetch links 
 if not args.destination:
     url,pos=lookup_location(config['history_path'])
-    print(f"Reloading {url}…")
+    print(f"Reloading {url}")
     links=fetch_page(url, config['image_path'])
     label_image(args, links, config['image_path'])
     display_image(args, pos, config['image_path'])
@@ -46,7 +46,7 @@ if not args.destination:
 # scroll Down 
 elif args.destination.lower() == 'd':
     url,pos=lookup_location(config['history_path'])
-    print(f"Scrolling down {url}…")
+    print(f"Scrolling down {url}")
     pos=int(pos)+1
     store_location(url, pos, config['history_path'])
     display_image(args, pos, config['image_path'])
@@ -55,7 +55,7 @@ elif args.destination.lower() == 'd':
 # scroll Up
 elif args.destination.lower() == 'u':
     url,pos=lookup_location(config['history_path']) 
-    print(f"Scrolling up {url}…")
+    print(f"Scrolling up {url}")
     pos=int(pos)-1
     if pos>=0:
         store_location(url, pos, config['history_path'])
@@ -71,7 +71,7 @@ elif "." in args.destination:
     else:
         url=f"http://{args.destination}"
 
-    print(f"Loading {url}…")
+    print(f"Loading {url}")
     links=fetch_page(url, config['image_path'])
     store_links(links, config['links_path'])
     store_location(url, 0, config['history_path'])
@@ -82,7 +82,7 @@ elif "." in args.destination:
 # by label number
 elif args.destination.isnumeric():
     url=lookup_link(args.destination, config['links_path'])
-    print(f"Linking to {url}…")
+    print(f"Linking to {url}")
     links=fetch_page(url, config['image_path'])
     store_links(links, config['links_path'])
     store_location(url, 0, config['history_path'])

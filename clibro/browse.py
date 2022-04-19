@@ -1,25 +1,25 @@
 import json
+from time import sleep
 from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
+
+def connect():
+    '''connect to the webdriver'''
+    options=FirefoxOptions()
+    options.add_argument('--headless')
+    driver = webdriver.Firefox(options=options)
+
+    return driver
+
 
 def fetch_page(url, img_path):
-    '''controller for screenshotting a page and returning its links'''
-
-    # headless browse 
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    driver = webdriver.Chrome(options=chrome_options)
-    driver.maximize_window()
+    '''screenshot a page and return its links'''
+    driver=connect()
     driver.get(url)
+    sleep(0.25)
+    driver.save_full_page_screenshot(img_path) 
     
-    # screenshot
-    s = driver.get_window_size()
-    #w = driver.execute_script('return document.body.parentNode.scrollWidth')
-    h = driver.execute_script('return document.body.parentNode.scrollHeight')
-    driver.set_window_size(1200, h)
-    driver.find_element(by=By.TAG_NAME, value='body').screenshot(img_path)
-
     # gather links
     linkElements = driver.find_elements(By.TAG_NAME, 'a')
 
