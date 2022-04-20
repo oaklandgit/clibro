@@ -48,7 +48,7 @@ So why not use a terminal-based browser such as Lynx? Because we may want a more
 
 ## Solution
 
-Clibro aims to be a CLI too that:
+Clibro aims to be a CLI tool that:
 
 1. presents web pages linearly, within the top-to-bottom flow of the terminal
 2. keeps you focused on whatever workflow you're in -- the browser comes to your command line, not vice versa
