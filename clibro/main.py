@@ -84,17 +84,17 @@ elif args.destination.lower() == 'u':
 # if a url is provided, we're going to it
 elif "." in args.destination:
     if validators.url(args.destination):
-        url=args.destination
+        to_url=args.destination
     else:
-        url=f"http://{args.destination}"
-    print(f"Loading {url}")
-    by_url(url,args)
+        to_url=f"http://{args.destination}"
+    print(f"Loading {to_url}")
+    by_url(to_url,args)
 
 # by label number
 elif args.destination.isnumeric():
-    url=lookup_link(args.destination, config['links_path'])
-    print(f"Linking to {url}")
-    by_url(url,args)
+    to_url=lookup_link(args.destination, config['links_path'])
+    print(f"Linking to {to_url}")
+    by_url(to_url,args)
 
 else:
     print("\n")
