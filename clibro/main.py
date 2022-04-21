@@ -4,6 +4,7 @@ import argparse
 import time
 import sys
 import validators
+from PIL import Image
 from history import store_location, lookup_location, store_links, lookup_link
 from browse import fetch_page
 from render import label_image, display_image
@@ -41,14 +42,21 @@ parser.add_argument("-s", "--label-size", type=int, default=18,
 
 args=parser.parse_args()
 
+def by_url(to_url, with_args):
+    '''Group functionality for fetching and storing a url'''
+    screenshot,links=fetch_page(to_url)
+    ss_labeled=label_image(with_args, links, screenshot)
+    display_image(with_args, 0, ss_labeled)
+    store_links(links, config['links_path'])
+    store_location(to_url, 0, config['history_path'])
+    ss_labeled.save(config['image_path'])
+    finish()
+
 # no dest, so get last visited, no need to fetch links
 if not args.destination:
     url,pos=lookup_location(config['history_path'])
     print(f"Reloading {url}")
-    links=fetch_page(url, config['image_path'])
-    label_image(args, links, config['image_path'])
-    display_image(args, pos, config['image_path'])
-    finish()
+    by_url(url,args)
 
 # scroll Down
 elif args.destination.lower() == 'd':
@@ -56,7 +64,8 @@ elif args.destination.lower() == 'd':
     print(f"Scrolling down {url}")
     pos=int(pos)+1
     store_location(url, pos, config['history_path'])
-    display_image(args, pos, config['image_path'])
+    image=Image.open(config['image_path'])
+    display_image(args, pos, image)
     finish()
 
 # scroll Up
@@ -66,7 +75,8 @@ elif args.destination.lower() == 'u':
     pos=int(pos)-1
     if pos>=0:
         store_location(url, pos, config['history_path'])
-        display_image(args, pos, config['image_path'])
+        image=Image.open(config['image_path'])
+        display_image(args, pos, image)
     else:
         print("You're already at the top of this page.")
     finish()
@@ -77,25 +87,14 @@ elif "." in args.destination:
         url=args.destination
     else:
         url=f"http://{args.destination}"
-
     print(f"Loading {url}")
-    links=fetch_page(url, config['image_path'])
-    store_links(links, config['links_path'])
-    store_location(url, 0, config['history_path'])
-    label_image(args, links, config['image_path'])
-    display_image(args, 0, config['image_path'])
-    finish()
+    by_url(url,args)
 
 # by label number
 elif args.destination.isnumeric():
     url=lookup_link(args.destination, config['links_path'])
     print(f"Linking to {url}")
-    links=fetch_page(url, config['image_path'])
-    store_links(links, config['links_path'])
-    store_location(url, 0, config['history_path'])
-    label_image(args, links, config['image_path'])
-    display_image(args, 0, config['image_path'])
-    finish()
+    by_url(url,args)
 
 else:
     print("\n")

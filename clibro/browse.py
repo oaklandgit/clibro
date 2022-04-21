@@ -1,5 +1,7 @@
 ''' Functions for Clibro capturing web pages '''
 from time import sleep
+from io import BytesIO
+from PIL import Image
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
@@ -13,12 +15,14 @@ def connect():
     return driver
 
 
-def fetch_page(url, img_path):
-    '''screenshot a page and return its links'''
+def fetch_page(url):
+    '''visit a page, return screenshot and its links'''
     driver=connect()
     driver.get(url)
     sleep(0.25)
-    driver.save_full_page_screenshot(img_path)
+
+    image_data=driver.get_full_page_screenshot_as_png()
+    image=Image.open(BytesIO(image_data))
 
     # gather links
     link_elements = driver.find_elements(By.TAG_NAME, 'a')
@@ -35,6 +39,6 @@ def fetch_page(url, img_path):
         })
 
     # done with driver
-    driver.quit()
+    # driver.quit()
 
-    return links
+    return image, links
