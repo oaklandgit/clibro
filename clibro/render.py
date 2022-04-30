@@ -1,8 +1,12 @@
 '''Functions for displaying the Clibro request to the user'''
-from PIL import ImageFont, ImageDraw
+from PIL import ImageFont, ImageDraw, Image
 from pixcat import Image as Pix
 
-def label_image(args, links, image):
+def label_image(
+        args: dict[str,str],
+        links: list[dict],
+        image: Image
+        ) -> Image:
     '''Prepare the screenshotted image for display'''
     fnt=ImageFont.truetype('Arial.ttf', args.label_size)
     black=(0,0,0)
@@ -19,7 +23,11 @@ def label_image(args, links, image):
 
     return image
 
-def display_image(args, pos, image):
+def display_image(
+        args: dict[str, str],
+        pos: str,
+        image: Image
+        ) -> None:
     '''Crop and output the Clibro image to the terminal'''
     left = 0
     top = int(pos) * int(args.browser_fold)

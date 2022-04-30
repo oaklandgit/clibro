@@ -11,7 +11,7 @@ from render import label_image, display_image
 
 start_time=time.time()
 
-def finish():
+def finish() -> None:
     '''Function to display time to complete the request'''
     duration=f"{time.time()-start_time:.2f}"
     print(f"Completed in {duration}s")
@@ -42,7 +42,7 @@ parser.add_argument("-s", "--label-size", type=int, default=18,
 
 args=parser.parse_args()
 
-def by_url(to_url, with_args):
+def by_url(to_url: str, with_args: dict[str,str]) -> None:
     '''Group functionality for fetching and storing a url'''
     screenshot,links=fetch_page(to_url)
     ss_labeled=label_image(with_args, links, screenshot)
