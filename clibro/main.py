@@ -9,12 +9,12 @@ from history import store_location, lookup_location, store_links, lookup_link
 from browse import fetch_page
 from render import label_image, display_image
 
-start_time=time.time()
+start=time.perf_counter()
 
 def finish() -> None:
     '''Function to display time to complete the request'''
-    duration=f"{time.time()-start_time:.2f}"
-    print(f"Completed in {duration}s")
+    end=time.perf_counter()
+    print(f"Completed in {end-start:.2f}s")
     sys.exit()
 
 config={
