@@ -139,7 +139,18 @@ bro http://python.org --list-links // or -l
 ## FAQs
 
 ### Q: Where does Clibro store its data?
-A: In your `/tmp/` directory
+A: Data is stored to the directory returned by Python's `tmpfile.gettempdir()`:
+
+> Python searches a standard list of directories to find one which the calling user can create files in. The list is:
+>
+> 1. The directory named by the TMPDIR environment variable.
+> 2. The directory named by the TEMP environment variable.
+> 3. The directory named by the TMP environment variable.
+> 3. A platform-specific location:
+>    - On Windows, the directories C:\TEMP, C:\TMP, \TEMP, and \TMP, in that order.
+>    - On all other platforms, the directories /tmp, /var/tmp, and /usr/tmp, in that order.
+> 4. As a last resort, the current working directory.
+
 
 ### Q: This looks hella useful! Can I contribute?
 A: Yes, please! Here's the [issues backlog](https://github.com/oaklandgit/clibro/issues).
