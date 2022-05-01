@@ -156,4 +156,4 @@ A: Data is stored to the directory returned by Python's `tmpfile.gettempdir()`:
 A: Yes, please! Here's the [issues backlog](https://github.com/oaklandgit/clibro/issues).
 
 ### Q: What's behind the name "Clibro?"
-A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." 😉
+A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." :wink:
