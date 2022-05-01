@@ -3,6 +3,8 @@
 import argparse
 import time
 import sys
+import os
+import tempfile
 import validators
 from PIL import Image
 from history import store_location, lookup_location, store_links, lookup_link
@@ -17,10 +19,12 @@ def finish() -> None:
     print(f"Completed in {end-start:.2f}s")
     sys.exit()
 
+tmpDir = tempfile.gettempdir()
+
 config={
-    'history_path': '/tmp/clibro.txt',
-    'image_path':'/tmp/clibro.png',
-    'links_path':'/tmp/clibro.json',
+    'history_path': os.path.join(tmpDir,'clibro.txt'),
+    'image_path': os.path.join(tmpDir,'clibro.png'),
+    'links_path': os.path.join(tmpDir,'clibro.json')
 }
 
 parser = argparse.ArgumentParser(
