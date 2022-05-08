@@ -6,7 +6,7 @@
 2. Install [Firefox Geckodriver](https://github.com/mozilla/geckodriver). (I'm looking for a way to automate this step, but it is what it is.)
 3. From within your graphics-capable terminal:
 ```
-pip install git+https://github.com/oaklandgit/clibro
+pip3 install git+https://github.com/oaklandgit/clibro
 ```
 
 ## Basic Usage
