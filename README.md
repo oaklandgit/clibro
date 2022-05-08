@@ -2,12 +2,11 @@
 
 ## Installation
 
-Clibro requires [Kitty](https://sw.kovidgoyal.net/kitty/), or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
-
-From within your graphics-capable terminal:
-
+1. Install [Kitty](https://sw.kovidgoyal.net/kitty/), or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
+2. Install [Firefox Geckodriver](https://github.com/mozilla/geckodriver). (I'm looking for a way to automate this step, but it is what it is.)
+3. From within your graphics-capable terminal:
 ```
-pip install git+https://github.com/oaklandgit/clibro
+pip3 install git+https://github.com/oaklandgit/clibro
 ```
 
 ## Basic Usage
