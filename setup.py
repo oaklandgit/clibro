@@ -13,7 +13,7 @@ setup(
         "Pillow>=9.1.0",
         "pixcat>=0.1.4",
         "selenium>=4.1.3",
-        "geckodriver>=0.31.0",
+        "geckodriver-autoinstaller",
         "validators>=0.18.2",
     ],
     entry_points={
