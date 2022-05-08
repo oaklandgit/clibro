@@ -2,9 +2,23 @@
 
 ## Installation
 
-1. Install [Kitty](https://sw.kovidgoyal.net/kitty/), or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
-2. Install [Firefox Geckodriver](https://github.com/mozilla/geckodriver). (I'm looking for a way to automate this step, but it is what it is.)
-3. From within your graphics-capable terminal:
+### 1. Install Firefox and [Firefox Geckodriver](https://github.com/mozilla/geckodriver):
+
+MacOS / Homebrew:
+```
+brew install firefox
+brew install geckodriver
+```
+
+### 2. Install [Kitty](https://sw.kovidgoyal.net/kitty/), or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
+MacOS / Homebrew:
+```
+brew install kitty
+```
+
+### 3. Install Clibro
+
+Launch Kitty (or other graphics-capable terminal) and:
 ```
 pip3 install git+https://github.com/oaklandgit/clibro
 ```
