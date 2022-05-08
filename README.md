@@ -1,5 +1,15 @@
 # Clibro
 
+## Installation
+
+Clibro requires [Kitty](https://sw.kovidgoyal.net/kitty/), or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
+
+From within your graphics-capable terminal:
+
+```
+pip install git+https://github.com/oaklandgit/clibro
+```
+
 ## Basic Usage
 
 ```
@@ -46,31 +56,11 @@ But one task that still takes us away from that flow is the information-gatherin
 
 So why not use a terminal-based browser such as Lynx? Because we may want a more visually-rich web view for providing easier consumption and context. Or perhaps you're a web developer who needs to see visually how things render graphically.
 
-## Solution
-
 Clibro aims to be a CLI tool that:
 
 1. presents web pages linearly, within the top-to-bottom flow of the terminal
 2. keeps you focused on whatever workflow you're in -- the browser comes to your command line, not vice versa
 3. provides more visual context than text-only browsers like Lynx
-
-## Requirements
-
-Clibro leverages the following packages:
-
-1. [Python3](https://www.python.org/downloads/)
-2. [Selenium](https://selenium-python.readthedocs.io/installation.html) 
-3. [Firefox Gecko Driver](https://firefox-source-docs.mozilla.org/testing/geckodriver/index.html)
-4. [pixcat](https://github.com/mirukana/pixcat): a CLI and Python package enabling image output to supported terminals
-5. Kitty, or any terminal that supports the [Terminal Graphics Prototocol](https://sw.kovidgoyal.net/kitty/graphics-protocol/)
-
-## Installation
-
-1. Make sure you have the above requirements
-2. Place the `clibro` directory wherever you want it and create an alias in your shell, e.g.
-```
-alias bro="python3 /path/to/clibro/main.py"
-```
 
 ## CLI Arguments
 
