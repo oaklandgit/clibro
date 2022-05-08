@@ -13,11 +13,12 @@ def connect() -> webdriver:
     driver = webdriver.Firefox(options=options)
     return driver
 
-def fetch_page(url :str) -> tuple[Image, list[dict]]:
+def fetch_page(args: dict[str,str], url :str) -> tuple[Image, list[dict]]:
     '''visit a page, return screenshot and its links'''
 
     try:
         driver=connect()
+        driver.set_window_size(args.browser_width, 2000)
         driver.get(url)
 
     except Exception as e:

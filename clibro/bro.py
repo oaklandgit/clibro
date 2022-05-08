@@ -50,7 +50,7 @@ def main():
 
     def by_url(to_url: str, with_args: dict[str,str]) -> None:
         '''Group functionality for fetching and storing a url'''
-        screenshot,links=fetch_page(to_url)
+        screenshot,links=fetch_page(with_args, to_url)
         ss_labeled=label_image(with_args, links, screenshot)
         display_image(with_args, 0, ss_labeled)
         store_links(links, config['links_path'])
