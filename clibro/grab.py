@@ -11,7 +11,7 @@ def connect() -> webdriver:
     options=FirefoxOptions()
     options.add_argument('--headless')
     driver = webdriver.Firefox(
-            executable_path='/opt/homebrew/bin/geckodriver',
+            executable_path='/opt/homebrew/bin/geckodriver-path',
             options=options
         )
     return driver
