@@ -10,7 +10,10 @@ def connect() -> webdriver:
     '''connect to the webdriver'''
     options=FirefoxOptions()
     options.add_argument('--headless')
-    driver = webdriver.Firefox(options=options)
+    driver = webdriver.Firefox(
+            executable_path='/usr/local/bin/geckodriver',
+            options=options
+        )
     return driver
 
 def fetch_page(url :str) -> tuple[Image, list[dict]]:
