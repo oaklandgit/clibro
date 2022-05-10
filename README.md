@@ -106,7 +106,7 @@ Override the default height of the "fold" (how much of the page viewport is show
 bro python.org -f 500
 ```
 
-Re-display the most-recently-visited page.
+Re-display the most-recently-visited page
 ```
 bro
 ```
