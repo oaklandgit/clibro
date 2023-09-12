@@ -1,6 +1,11 @@
 # Mac OS
 .DS_Store
 
+# Bun and JS stuff
+node_modules/
+bun.lockb
+screenshot.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
