@@ -7,12 +7,22 @@ import ansiEscapes from "ansi-escapes"
 
 const SCREENSHOT = "screenshot.png"
 
+const isUrl = (str) => {
+  let url
+  try {
+    url = new URL(str)
+  } catch (_) {
+    return false
+  }
+  return url.protocol === "http:" || url.protocol === "https:"
+}
+
 const cli = meow("meow!", {
   importMeta: import.meta,
   flags: {
-    rainbow: {
-      type: "boolean",
-      shortFlag: "r",
+    width: {
+      type: "number",
+      shortFlag: "w",
     },
   },
 })
@@ -26,9 +36,15 @@ const takeScreenshot = async (url, w = 1280, h = 720) => {
   await browser.close()
 }
 
-await takeScreenshot(cli.input.at(0))
+const renderImage = (path) => {
+  const image = fs.readFileSync(SCREENSHOT)
+  console.log(ansiEscapes.image(image))
+}
 
-const image = fs.readFileSync(SCREENSHOT)
-
-console.log(ansiEscapes.image(image))
-console.log(cli.input.at(0), cli.flags)
+if (isUrl(cli.input.at(0))) {
+  console.log("Grabbing screenshot...")
+  await takeScreenshot(cli.input.at(0))
+  renderImage(SCREENSHOT)
+} else {
+  console.log("Please provide a valid URL")
+}
