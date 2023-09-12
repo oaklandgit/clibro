@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "ansi-escapes": "^6.2.0",
+    "jimp": "^0.22.10",
     "meow": "^12.1.1",
     "puppeteer": "^21.1.1",
     "term-img": "^6.0.0"
