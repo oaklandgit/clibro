@@ -1,0 +1,17 @@
+{
+  "name": "bun",
+  "module": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "bun run index.js"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "dependencies": {
+    "ansi-escapes": "^6.2.0",
+    "meow": "^12.1.1",
+    "puppeteer": "^21.1.1",
+    "term-img": "^6.0.0"
+  }
+}
