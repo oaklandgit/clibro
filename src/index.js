@@ -18,7 +18,7 @@ const cli = meow("meow!", {
 })
 
 const takeScreenshot = async (url, w = 1280, h = 720) => {
-  const browser = await puppeteer.launch()
+  const browser = await puppeteer.launch({ headless: "new" })
   const page = await browser.newPage()
   await page.setViewport({ width: w, height: h })
   await page.goto(url, { waitUntil: "networkidle0" })
