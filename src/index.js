@@ -37,7 +37,7 @@ const takeScreenshot = async (url, w = 1280, h = 720) => {
 }
 
 const renderImage = (path) => {
-  const image = fs.readFileSync(SCREENSHOT)
+  const image = fs.readFileSync(path)
   console.log(ansiEscapes.image(image))
 }
 
