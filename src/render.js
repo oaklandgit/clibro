@@ -21,7 +21,6 @@ export const prepareThenRenderImage = async (details, path) => {
 
       image.write(path, () => {
         outputImage(path)
-        console.log("Done in X seconds")
       })
     })
     .catch((err) => {
