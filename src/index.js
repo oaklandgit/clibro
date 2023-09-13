@@ -15,6 +15,7 @@ const cli = meow("meow!", {
     width: {
       type: "number",
       shortFlag: "w",
+      default: 1280,
     },
   },
 })
@@ -23,12 +24,12 @@ const pageDetails = {
   links: [],
 }
 
-const takeScreenshot = async (url, path, w = 1280, h = 720) => {
+const takeScreenshot = async (url, path, w = cli.flags.width, h = 720) => {
   const browser = await puppeteer.launch({ headless: "new" })
   const page = await browser.newPage()
   await page.setViewport({ width: w, height: h })
   await page.goto(url, { waitUntil: "networkidle0" })
-  await page.screenshot({ path: path })
+  await page.screenshot({ path: path, fullPage: true })
   pageDetails.links = await page.$$eval("a", (links) =>
     links.map((link) => ({
       url: link.href,
@@ -43,13 +44,25 @@ const takeScreenshot = async (url, path, w = 1280, h = 720) => {
 const outputImage = async (path) => {
   const image = fs.readFileSync(path)
   console.log(ansiEscapes.image(image))
-  console.log(pageDetails.links)
 }
 
 const prepareThenRenderImage = async (path) => {
+  const white = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE)
+  const black = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
+
   Jimp.read(path)
     .then((image) => {
-      image.flip(true, true)
+      ;[black, white].forEach((font, offset) => {
+        pageDetails.links.forEach((link, index) => {
+          image.print(
+            font,
+            link.top * 2 - offset,
+            link.left * 2 + offset,
+            index.toString()
+          )
+        })
+      })
+
       image.write(path, () => outputImage(path))
       console.log("Done in X seconds")
     })
