@@ -17,6 +17,16 @@ const cli = meow("meow!", {
       shortFlag: "w",
       default: 1280,
     },
+    height: {
+      type: "number",
+      shortFlag: "h",
+      // empty for full page
+    },
+    scale: {
+      type: "number",
+      shortFlag: "s",
+      default: 1,
+    },
   },
 })
 
@@ -24,12 +34,21 @@ const pageDetails = {
   links: [],
 }
 
-const takeScreenshot = async (url, path, w = cli.flags.width, h = 720) => {
+const takeScreenshot = async (
+  url,
+  path,
+  w = cli.flags.width,
+  h = cli.flags.height
+) => {
   const browser = await puppeteer.launch({ headless: "new" })
   const page = await browser.newPage()
-  await page.setViewport({ width: w, height: h })
+  await page.setViewport({
+    width: w,
+    height: h ? h : 720,
+    deviceScaleFactor: cli.flags.scale,
+  })
   await page.goto(url, { waitUntil: "networkidle0" })
-  await page.screenshot({ path: path, fullPage: true })
+  await page.screenshot({ path: path, fullPage: h ? false : true })
   pageDetails.links = await page.$$eval("a", (links) =>
     links.map((link) => ({
       url: link.href,
