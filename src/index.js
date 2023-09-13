@@ -9,16 +9,6 @@ const Jimp = require("jimp")
 
 const SCREENSHOT = "screenshot.png"
 
-const isUrl = (str) => {
-  let url
-  try {
-    url = new URL(str)
-  } catch (_) {
-    return false
-  }
-  return url.protocol === "http:" || url.protocol === "https:"
-}
-
 const cli = meow("meow!", {
   importMeta: import.meta,
   flags: {
@@ -29,25 +19,38 @@ const cli = meow("meow!", {
   },
 })
 
+const pageDetails = {
+  links: [],
+}
+
 const takeScreenshot = async (url, path, w = 1280, h = 720) => {
   const browser = await puppeteer.launch({ headless: "new" })
   const page = await browser.newPage()
   await page.setViewport({ width: w, height: h })
   await page.goto(url, { waitUntil: "networkidle0" })
   await page.screenshot({ path: path })
+  pageDetails.links = await page.$$eval("a", (links) =>
+    links.map((link) => ({
+      url: link.href,
+      text: link.innerText,
+      top: link.getBoundingClientRect().top,
+      left: link.getBoundingClientRect().left,
+    }))
+  )
   await browser.close()
 }
 
-const renderImage = async (path) => {
+const outputImage = async (path) => {
   const image = fs.readFileSync(path)
   console.log(ansiEscapes.image(image))
+  console.log(pageDetails.links)
 }
 
 const prepareThenRenderImage = async (path) => {
   Jimp.read(path)
     .then((image) => {
       image.flip(true, true)
-      image.write(path, () => renderImage(path))
+      image.write(path, () => outputImage(path))
       console.log("Done in X seconds")
     })
     .catch((err) => {
@@ -55,31 +58,27 @@ const prepareThenRenderImage = async (path) => {
     })
 }
 
+const patterns = {
+  url: /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g,
+  code: /^[DU]$/g,
+  label: /[0-9]/g,
+}
+
 const handleUserInput = (input) => {
-  if (isUrl(input)) {
-    handleUrlRequest(input)
-  } else if (isUrl("http://" + input)) {
-    handleUrlRequest("http://" + input)
+  if (patterns.url.test(input)) {
+    handleUrl(input)
+  } else if (patterns.code.test(input)) {
+    console.log("That was a code!")
+  } else if (patterns.label.test(input)) {
+    console.log("That was a numeric label!")
   } else {
-    switch (input) {
-      case "A":
-        console.log("option A selected")
-        break
-
-      case "B":
-        console.log("option B selected")
-        break
-
-      default:
-        console.log("Please provide a valid URL")
-        break
-    }
+    console.log("Unknown")
   }
 }
 
-const handleUrlRequest = (url) => {
+const handleUrl = async (url) => {
   console.log(`Grabbing screenshot of ${url}...`)
-  takeScreenshot(url, SCREENSHOT)
+  await takeScreenshot(url, SCREENSHOT)
   prepareThenRenderImage(SCREENSHOT)
 }
 
