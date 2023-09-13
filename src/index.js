@@ -29,35 +29,38 @@ const cli = meow("Clibro", {
   },
 })
 
-// const patterns = {
-//   url: /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g,
-//   code: /^[DU]$/g,
-//   label: /[0-9]/g,
-// }
-
 const urlPattern =
   /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g
 const labelPattern = /[0-9]/g
 
 const handleUserInput = (input) => {
   if (urlPattern.test(input)) {
-    // console.log()
-    const spinner = new Spinner(`Grabbing ${input}... %s`)
-    spinner.setSpinnerString("|/-\\")
-    spinner.start()
-    handleUrl(input, spinner, Date.now())
+    handleUrl(input)
   } else if (input === "D") {
-    console.log("Scrolling down...")
+    handleScroll(1)
   } else if (input === "U") {
-    console.log("Scrolling up...")
+    handleScroll(-1)
   } else if (labelPattern.test(input)) {
-    console.log(`Loading link labeled ${input}...`)
+    handleLink(input)
   } else {
     console.log(`Invalid input: ${input}. Try 'bro --help' for help.`)
   }
 }
 
-const handleUrl = async (url, spinner, start) => {
+const handleScroll = (dir) => {
+  const spinner = new Spinner(`Scrolling ${dir < 0 ? "up" : "down"}... %s`)
+  spinner.setSpinnerString("|/-\\")
+  spinner.start()
+  // TODO: scroll down
+  spinner.stop()
+}
+
+const handleUrl = async (url) => {
+  const start = Date.now()
+  const spinner = new Spinner(`Grabbing ${url}... %s`)
+  spinner.setSpinnerString("|/-\\")
+  spinner.start()
+
   const pageDetails = await takeScreenshot(url, SCREENSHOT, {
     w: cli.flags.width,
     h: cli.flags.height,
@@ -67,6 +70,14 @@ const handleUrl = async (url, spinner, start) => {
   console.log()
   spinner.stop()
   console.log(`Done in ${(Date.now() - start) / 1000} seconds`)
+}
+
+const handleLink = (num) => {
+  const spinner = new Spinner(`Loading link #${num} %s`)
+  spinner.setSpinnerString("|/-\\")
+  spinner.start()
+  // TODO: load link
+  spinner.stop()
 }
 
 handleUserInput(cli.input[0])
