@@ -26,6 +26,11 @@ const cli = meow("Clibro", {
       shortFlag: "s",
       default: 1,
     },
+    invert: {
+      type: "boolean",
+      shortFlag: "i",
+      default: false,
+    },
   },
 })
 
@@ -66,7 +71,7 @@ const handleUrl = async (url) => {
     h: cli.flags.height,
     s: cli.flags.scale,
   })
-  await prepareThenRenderImage(pageDetails, SCREENSHOT)
+  await prepareThenRenderImage(pageDetails, cli.flags.invert, SCREENSHOT)
   console.log()
   spinner.stop()
   console.log(`Done in ${(Date.now() - start) / 1000} seconds`)

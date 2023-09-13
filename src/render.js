@@ -2,18 +2,19 @@ import fs from "node:fs"
 const Jimp = require("jimp")
 import ansiEscapes from "ansi-escapes"
 
-export const prepareThenRenderImage = async (details, path) => {
-  const white = await Jimp.loadFont(Jimp.FONT_SANS_32_WHITE)
-  const black = await Jimp.loadFont(Jimp.FONT_SANS_32_BLACK)
+export const prepareThenRenderImage = async (details, invert, path) => {
+  const labels = [Jimp.FONT_SANS_32_WHITE, Jimp.FONT_SANS_32_BLACK]
+  const background = await Jimp.loadFont(labels[invert ? 1 : 0])
+  const foreground = await Jimp.loadFont(labels[invert ? 0 : 1])
 
   Jimp.read(path)
     .then((image) => {
-      ;[black, white].forEach((font, offset) => {
+      ;[background, foreground].forEach((font, offset) => {
         details.links.forEach((link, index) => {
           image.print(
             font,
-            link.top * 2 - offset,
-            link.left * 2 + offset,
+            link.left + offset * 3,
+            link.top - offset * 3,
             index.toString()
           )
         })

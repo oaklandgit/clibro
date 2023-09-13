@@ -18,8 +18,8 @@ export const takeScreenshot = async (url, path, config) => {
     links.map((link) => ({
       url: link.href,
       text: link.innerText,
-      top: link.getBoundingClientRect().top,
       left: link.getBoundingClientRect().left,
+      top: link.getBoundingClientRect().top,
     }))
   )
   browser.close()
