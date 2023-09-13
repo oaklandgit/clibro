@@ -22,6 +22,9 @@ export const takeScreenshot = async (url, path, config) => {
       top: link.getBoundingClientRect().top,
     }))
   )
+
+  await Bun.write("data.json", JSON.stringify(pageDetails))
+
   browser.close()
   return pageDetails
 }

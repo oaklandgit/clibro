@@ -6,30 +6,38 @@ Currently only works with iTerm2 (a graphics-capable terminal). Actively working
 
 ## Installation
 
-Using Bun:
+### Requires bun
+
+`bun` is a javascript runtime. If you don't have it, install it:
 
 ```
-cd src
-bun install
+npm install -g bun
+```
+
+You can put a copy of Clibro anywhere convenient. For example:
+
+```
+$ mkdir ~/clibro
+$ cd ~/clibro
+```
+
+Then clone and build the repo:
+
+```
+$ bun install git+https://github.com/oaklandgit/clibro
+```
+
+To use it available anywhere (which is sort of the point), add an alias to your shell profile. I'm using .zshrc, but you can use .bashrc or whatever your shell uses.
+
+```
+$ echo "alias bro='[PATH TO YOUR COPY]'" >> ~/.zshrc
+
+$ source .zshrc
 ```
 
 ## Basic Usage
 
-WORK IN PROGRESS
-
-```
-$ bro [destination]
-```
-
-The destination can be:
-
-1. a URL
-2. a numerically-labeled link from the previously-displayed URL
-3. a scroll direction (U = up, D = down)
-
-## Examples
-
-Display a web page as an inline image in the terminal:
+Start Clibro by calling any URL, which will fetch the page and display a screenshot it in the terminal:
 
 ```
 $ bro python.org
@@ -83,19 +91,7 @@ Follow a link by its numeric label
 bro 35
 ```
 
-Display more of the current page (similar to "scrolling DOWN below the fold")
-
-```
-bro d
-```
-
-Display more of the current page (similar to "scrolling UP")
-
-```
-bro u
-```
-
-Override the default width of the page
+Override the default width of the virtual browser's viewport
 
 ```
 bro -w 1200
@@ -104,7 +100,7 @@ bro -w 1200
 Override the default height of the "fold" (how much of the page viewport is shown)
 
 ```
-bro python.org -f 500
+bro python.org -h 500
 ```
 
 Re-display the most-recently-visited page
@@ -153,7 +149,10 @@ bro http://python.org --list-links // or -l
 
 ### Q: Where does Clibro store its data?
 
-TD
+Clibro creates two files in the directory you set up initially. For example, if you cloned the repo to `~/clibro`, then Clibro will store its data there.
+
+- `data.png` the last-visited page's screenshot
+- `data.json` sthe last-visited page and all its links
 
 ### Q: This looks hella useful! Can I contribute?
 

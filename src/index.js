@@ -77,12 +77,21 @@ const handleUrl = async (url) => {
   console.log(`Done in ${(Date.now() - start) / 1000} seconds`)
 }
 
-const handleLink = (num) => {
+const handleLink = async (num) => {
   const spinner = new Spinner(`Loading link #${num} %s`)
   spinner.setSpinnerString("|/-\\")
   spinner.start()
-  // TODO: load link
+
+  const path = "data.json"
+  const data = Bun.file(path)
+  const contents = await data.json()
   spinner.stop()
+
+  if (contents.links[num].url) {
+    handleUrl(contents.links[num].url)
+  } else {
+    console.log(`Link #${num} doesn't exist, bro.`)
+  }
 }
 
 handleUserInput(cli.input[0])
