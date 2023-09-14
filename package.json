@@ -1,15 +1,8 @@
 {
   "name": "clibro",
   "version": "0.1.3",
+  "description": "A visual command-line web browser that doesn't move focus away from your workflow.",
   "author": "Larry Stone",
-  "module": "src/index.js",
-  "type": "module",
-  "scripts": {
-    "start": "bun run src/index.js"
-  },
-  "devDependencies": {
-    "bun-types": "latest"
-  },
   "dependencies": {
     "ansi-escapes": "^6.2.0",
     "cli-spinner": "^0.2.10",
