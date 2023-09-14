@@ -45,7 +45,7 @@ echo "alias bro='~/clibro/src/index.js'" >> ~/.zshrc
 ```
 
 ```
-$ source .zshrc
+source .zshrc
 ```
 
 ## Basic Usage
