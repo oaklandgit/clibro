@@ -19,12 +19,13 @@ You can put a copy of Clibro anywhere convenient. For example:
 ```
 $ mkdir ~/clibro
 $ cd ~/clibro
+$ git clone https://github.com/oaklandgit/clibro.git
 ```
 
-Then clone and build the repo:
+Install dependencies:
 
 ```
-$ bun install git+https://github.com/oaklandgit/clibro
+bun install
 ```
 
 ### Create an alias
