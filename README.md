@@ -107,12 +107,6 @@ Invert the labels (to be more readable)
 bro -i
 ```
 
-Help
-
-```
-bro -h
-```
-
 ## FAQs
 
 ### Q: Where does Clibro store its data?
