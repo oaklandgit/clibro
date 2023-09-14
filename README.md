@@ -12,7 +12,7 @@ I'm actively working to make it compatible with Kitty and VS Code's built-in ter
 
 `bun` is an amazing new javascript runtime. Installation instructions are [here](http://bun.sh).
 
-### Installing Clibro
+### Download and install
 
 You can put a copy of Clibro anywhere convenient. For example:
 
