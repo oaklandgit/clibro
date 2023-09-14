@@ -16,16 +16,6 @@ const cli = meow("Clibro", {
       shortFlag: "w",
       default: 1280,
     },
-    height: {
-      type: "number",
-      shortFlag: "h",
-      // empty for full page
-    },
-    scale: {
-      type: "number",
-      shortFlag: "s",
-      default: 1,
-    },
     invert: {
       type: "boolean",
       shortFlag: "i",
@@ -41,23 +31,18 @@ const labelPattern = /[0-9]/g
 const handleUserInput = (input) => {
   if (urlPattern.test(input)) {
     handleUrl(input)
-  } else if (input === "D") {
-    handleScroll(1)
-  } else if (input === "U") {
-    handleScroll(-1)
   } else if (labelPattern.test(input)) {
     handleLink(input)
   } else {
-    console.log(`Invalid input: ${input}. Try 'bro --help' for help.`)
+    handleEmpty(input)
   }
 }
 
-const handleScroll = (dir) => {
-  const spinner = new Spinner(`Scrolling ${dir < 0 ? "up" : "down"}... %s`)
-  spinner.setSpinnerString("|/-\\")
-  spinner.start()
-  // TODO: scroll down
-  spinner.stop()
+const handleEmpty = async () => {
+  const path = "data.json"
+  const file = Bun.file(path)
+  const data = await file.json()
+  handleUrl(data.visited)
 }
 
 const handleUrl = async (url) => {
@@ -66,11 +51,7 @@ const handleUrl = async (url) => {
   spinner.setSpinnerString("|/-\\")
   spinner.start()
 
-  const pageDetails = await takeScreenshot(url, SCREENSHOT, {
-    w: cli.flags.width,
-    h: cli.flags.height,
-    s: cli.flags.scale,
-  })
+  const pageDetails = await takeScreenshot(url, SCREENSHOT, cli.flags.width)
   await prepareThenRenderImage(pageDetails, cli.flags.invert, SCREENSHOT)
   console.log()
   spinner.stop()

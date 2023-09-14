@@ -1,19 +1,20 @@
 import puppeteer from "puppeteer"
 
-const pageDetails = {
-  links: [],
-}
+export const takeScreenshot = async (url, path, width) => {
+  const pageDetails = {
+    visited: url,
+    links: [],
+  }
 
-export const takeScreenshot = async (url, path, config) => {
   const browser = await puppeteer.launch({ headless: "new" })
   const page = await browser.newPage()
   await page.setViewport({
-    width: config.w,
-    height: config.h ? config.h : 720,
-    deviceScaleFactor: config.s,
+    width,
+    height: 720, // won't matter. Screenshot will be full page
+    deviceScaleFactor: 1,
   })
   await page.goto(url, { waitUntil: "networkidle0" })
-  await page.screenshot({ path: path, fullPage: config.h ? false : true })
+  await page.screenshot({ path: path, fullPage: true })
   pageDetails.links = await page.$$eval("a", (links) =>
     links.map((link) => ({
       url: link.href,

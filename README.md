@@ -44,7 +44,7 @@ $ source .zshrc
 Start Clibro by calling any URL, which will fetch the page and display a labeled screenshot in the terminal:
 
 ```
-$ bro python.org
+$ bro http://python.org
 ```
 
 ![Screenshot of a Clibro page by URL](/screenshots/clibro-by-url.png)
@@ -80,7 +80,7 @@ Clibro aims to be a CLI tool that:
 Display any web page
 
 ```
-bro apple.com
+bro http://apple.com
 ```
 
 Follow a link by its numeric label
@@ -95,46 +95,22 @@ Override the default width of the virtual browser's viewport
 bro -w 620
 ```
 
-Override the default height of the "fold" (how much of the page viewport is shown)
-
-```
-bro python.org -h 500
-```
-
 Re-display the most-recently-visited page
 
 ```
 bro
 ```
 
+Invert the labels (to be more readable)
+
+```
+bro -i
+```
+
 Help
 
 ```
 bro -h
-```
-
-## Not yet implemented
-
-Go backward or forward in history
-
-```
-bro B
-```
-
-```
-bro F
-```
-
-Display without link labels
-
-```
-bro http://python.org --no-labels // or -n
-```
-
-Also display a text-based, ordered list of all the links:
-
-```
-bro http://python.org --list-links // or -l
 ```
 
 ## FAQs
@@ -149,7 +125,3 @@ Clibro creates two files in the directory you set up initially. For example, if 
 ### Q: This looks hella useful! Can I contribute?
 
 A: Yes, please! Here's the [issues backlog](https://github.com/oaklandgit/clibro/issues).
-
-### Q: What's behind the name "Clibro?"
-
-A: It's a portmanteau of "CLI" and "Browser." And also, it's your command-line's "bro." :wink:
