@@ -1,3 +1,4 @@
+import { readFileSync } from "fs"
 import ansiEscapes from "ansi-escapes"
 const Jimp = require("jimp")
 
@@ -31,8 +32,6 @@ export const prepareThenRenderImage = async (details, invert, path) => {
 }
 
 export const outputImage = async (path) => {
-  const file = Bun.file(path)
-  const arrbuf = await file.arrayBuffer()
-  const buffer = Buffer.from(arrbuf)
-  console.log(ansiEscapes.image(buffer))
+  const image = readFileSync(path)
+  console.log(ansiEscapes.image(image))
 }
