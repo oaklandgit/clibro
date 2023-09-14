@@ -41,7 +41,7 @@ $ source .zshrc
 
 ## Basic Usage
 
-Start Clibro by calling any URL, which will fetch the page and display a screenshot it in the terminal:
+Start Clibro by calling any URL, which will fetch the page and display a labeled screenshot in the terminal:
 
 ```
 $ bro python.org
@@ -49,7 +49,7 @@ $ bro python.org
 
 ![Screenshot of a Clibro page by URL](/screenshots/clibro-by-url.png)
 
-Notice the image has numeric labels representing each link, which can be used to browse:
+The numeric labels represent the page's links. To follow a link, simply call it by its label:
 
 ```
 $ bro 45
