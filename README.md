@@ -2,17 +2,17 @@
 
 ## Requirements
 
-Currently only works with iTerm2 (a graphics-capable terminal). Actively working to make it compatible with Kitty and VS Code's built-in terminal.
+**Currently only works with [iTerm2](https://iterm2.com/), a graphics-capable terminal for MacOS.**
+
+I'm actively working to make it compatible with Kitty and VS Code's built-in terminal, both of which are purported to be graphics-capable.
 
 ## Installation
 
 ### Requires bun
 
-`bun` is a javascript runtime. If you don't have it, install it:
+`bun` is an amazing new javascript runtime. Installation instructions are [here](http://bun.sh).
 
-```
-npm install -g bun
-```
+### Installing Clibro
 
 You can put a copy of Clibro anywhere convenient. For example:
 
@@ -27,7 +27,9 @@ Then clone and build the repo:
 $ bun install git+https://github.com/oaklandgit/clibro
 ```
 
-To use it available anywhere (which is sort of the point), add an alias to your shell profile. I'm using .zshrc, but you can use .bashrc or whatever your shell uses.
+To make it available in any terminal session, add an alias to your shell profile. I'm using .zshrc, but you can use .bashrc or whatever your shell uses.
+
+The recommended alias is "bro", as in "bro, take me to the Python docs." But really, Clibro is short for "CLI Browser." (You can call it whatever you want. Just be nice.)
 
 ```
 $ echo "alias bro='[PATH TO YOUR COPY]'" >> ~/.zshrc
@@ -57,17 +59,11 @@ $ bro 45
 
 Also notice that after each command, you're back in the shell prompt. You could continue browsing, or you could continue with other work in the terminal. Clibro will remember the last-visited page and all its links.
 
-If the previous page has scrolled out of view, you could scroll back. But it would probably be easier to simply re-display it. Calling Clibro with no url or numbered link will simply redisplay that last page:
-
-```
-$ bro
-```
-
 ## Philosophy
 
 We use the command line because it enables -- among other things -- more efficient workflows than using a mouse and windows. It lets us focus on our _tasks_ while not making us context switch between various software packages. Instead, we simply string together a flow of command line tools without ever having to leave the shell.
 
-But one task that still takes us away from that flow is the information-gathering we do in web browsers such as Chrome or Safari. This forces us out of the terminal and into the GUI, yucking our yum.
+But one task that still takes us away from that flow is the information-gathering we do in web browsers such as Chrome or Safari. This forces us out of the terminal and into the GUI, ruining our flow.
 
 So why not use a terminal-based browser such as Lynx? Because we may want a more visually-rich web view for providing easier consumption and context. Or perhaps you're a web developer who needs to see visually how things render graphically.
 
@@ -94,7 +90,7 @@ bro 35
 Override the default width of the virtual browser's viewport
 
 ```
-bro -w 1200
+bro -w 620
 ```
 
 Override the default height of the "fold" (how much of the page viewport is shown)
@@ -107,12 +103,6 @@ Re-display the most-recently-visited page
 
 ```
 bro
-```
-
-You can also add flags to re-render the last-visited page as needed. For example, this will redisplay the most-recently-visited page in a narrower viewport (perhaps you wanted to see how it looks on a mobile device)
-
-```
-bro -w 420
 ```
 
 Help
