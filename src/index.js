@@ -7,8 +7,29 @@ import { prepareThenRenderImage } from "./render"
 const Spinner = require("cli-spinner").Spinner
 
 const SCREENSHOT = "screenshot.png"
+const HELP_TEXT = `
+=====
 
-const cli = meow("Clibro", {
+Clibro: A visual command-line web browser that doesn't move focus away from your workflow.
+
+Requires:         MacOS, iTerm2, and Bun      
+
+Usage:
+
+  $ bro <url>     Present a screenshot of the url in the terminal
+  $ bro <number>  Follow a link by the numbered label in the previous screenshot        
+
+Flags:
+
+  -w, --width     Set the width of the virtual browser's viewport (default: 1280)
+  -i, --invert    Invert the labels if needed for better readabiliy
+
+Visit https://github.com/oaklandgit/clibro for more information.
+
+=====
+`
+
+const cli = meow(HELP_TEXT, {
   importMeta: import.meta,
   flags: {
     width: {
@@ -41,8 +62,12 @@ const handleUserInput = (input) => {
 const handleEmpty = async () => {
   const path = "data.json"
   const file = Bun.file(path)
-  const data = await file.json()
-  handleUrl(data.visited)
+  try {
+    const data = await file.json()
+    handleUrl(data.visited)
+  } catch (_) {
+    cli.showHelp()
+  }
 }
 
 const handleUrl = async (url) => {
