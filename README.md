@@ -27,6 +27,8 @@ Then clone and build the repo:
 $ bun install git+https://github.com/oaklandgit/clibro
 ```
 
+### Create an alias
+
 To make it available in any terminal session, add an alias to your shell profile. I'm using .zshrc, but you can use .bashrc or whatever your shell uses.
 
 The recommended alias is "bro", as in "bro, take me to the Python docs." But really, Clibro is short for "CLI Browser." (You can call it whatever you want. Just be nice.)
