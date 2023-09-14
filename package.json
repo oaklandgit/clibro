@@ -1,9 +1,11 @@
 {
-  "name": "bun",
-  "module": "index.js",
+  "name": "clibro",
+  "version": "0.1.3",
+  "author": "Larry Stone",
+  "module": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "bun run index.js"
+    "start": "bun run src/index.js"
   },
   "devDependencies": {
     "bun-types": "latest"
