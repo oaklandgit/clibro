@@ -1,6 +1,6 @@
 {
   "name": "clibro",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "A visual command-line web browser that doesn't move focus away from your workflow.",
   "author": "Larry Stone",
   "dependencies": {
