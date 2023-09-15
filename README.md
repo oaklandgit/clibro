@@ -8,9 +8,9 @@ I'm actively working to make it compatible with Kitty and Visual Studio Code's b
 
 ## Installation
 
-### Requires bun
+### Requires Bun
 
-bun is an amazing new javascript runtime. Installation instructions are [here](http://bun.sh).
+Bun is an amazing new javascript runtime. Installation instructions are [here](http://bun.sh).
 
 ### Install Clibro
 
