@@ -4,7 +4,7 @@
 
 1. Any graphics-capable terminal on macOS: [iTerm2](https://iterm2.com/), [Ghostty](https://ghostty.org/), or [Kitty](https://sw.kovidgoyal.net/kitty/).
 
-2. Bun runtime. Installation instructions are [here](http://bun.sh).\*\*
+2. Bun runtime. Installation instructions are [here](http://bun.sh).
 
 ## Installation
 

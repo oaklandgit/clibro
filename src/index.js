@@ -23,6 +23,7 @@ Flags:
 
   -w, --width     Set the width of the virtual browser's viewport (default: 1280)
   -i, --invert    Invert the labels if needed for better readabiliy
+  -h, --help      Show this help message
 
 Visit https://github.com/oaklandgit/clibro for more information.
 
@@ -76,11 +77,18 @@ const handleUrl = async (url) => {
   spinner.setSpinnerString("|/-\\")
   spinner.start()
 
-  const pageDetails = await takeScreenshot(url, SCREENSHOT, cli.flags.width)
-  await prepareThenRenderImage(pageDetails, cli.flags.invert, SCREENSHOT)
-  console.log()
-  spinner.stop()
-  console.log(`Done in ${(Date.now() - start) / 1000} seconds`)
+  try {
+    const pageDetails = await takeScreenshot(url, SCREENSHOT, cli.flags.width)
+    await prepareThenRenderImage(pageDetails, cli.flags.invert, SCREENSHOT)
+    console.log()
+    spinner.stop()
+    console.log(`Done in ${(Date.now() - start) / 1000} seconds`)
+  } catch (err) {
+    spinner.stop()
+    console.error(
+      `\nCouldn't load "${url}". Make sure it's a valid URL including http:// or https://.`,
+    )
+  }
 }
 
 const handleLink = async (num) => {
@@ -100,4 +108,8 @@ const handleLink = async (num) => {
   }
 }
 
-handleUserInput(cli.input[0])
+if (process.argv.includes("-h")) {
+  cli.showHelp()
+} else {
+  handleUserInput(cli.input[0])
+}
