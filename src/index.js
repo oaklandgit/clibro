@@ -8,15 +8,20 @@ const Spinner = require("cli-spinner").Spinner
 
 const SCREENSHOT = "screenshot.png"
 const HELP_TEXT = `
-=====
 
-Clibro: A visual command-line web browser that doesn't move focus away from your workflow.
+ ######  ##       #### ########  ########   #######  
+##    ## ##        ##  ##     ## ##     ## ##     ## 
+##       ##        ##  ##     ## ##     ## ##     ## 
+##       ##        ##  ########  ########  ##     ## 
+##       ##        ##  ##     ## ##   ##   ##     ## 
+##    ## ##        ##  ##     ## ##    ##  ##     ## 
+ ######  ######## #### ########  ##     ##  #######  
 
-Requires:         MacOS, iTerm2, and Bun      
+Requires:         Any graphics-capable terminal on macOS (iTerm2, Kitty, Ghostty) and Bun.
 
 Usage:
 
-  $ bro <url>     Present a screenshot of the url in the terminal
+  $ bro <url>     Present a screenshot of the url in the terminal. Must include http:// or https://
   $ bro <number>  Follow a link by the numbered label in the previous screenshot        
 
 Flags:
