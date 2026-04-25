@@ -2,15 +2,11 @@
 
 ## Requirements
 
-**Currently only works with [iTerm2](https://iterm2.com/), a graphics-capable terminal for MacOS.**
+1. Any graphics-capable terminal on macOS: [iTerm2](https://iterm2.com/), [Ghostty](https://ghostty.org/), or [Kitty](https://sw.kovidgoyal.net/kitty/).
 
-I'm actively working to make it compatible with Kitty and Visual Studio Code's built-in terminal, both of which are graphics-capable.
+2. Bun runtime. Installation instructions are [here](http://bun.sh).\*\*
 
 ## Installation
-
-### Requires Bun
-
-Bun is an amazing new javascript runtime. Installation instructions are [here](http://bun.sh).
 
 ### Install Clibro
 
@@ -28,11 +24,14 @@ Install dependencies:
 
 ```
 cd ~/clibro
+
 ```
 
 ```
 bun install
 ```
+
+> **Note:** `bun install` downloads Chromium (~300MB) as part of the puppeteer dependency. This can take 10+ minutes depending on your connection. Grab a coffee — it only happens once.
 
 ### Create an alias
 

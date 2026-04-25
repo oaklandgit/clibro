@@ -31,7 +31,26 @@ export const prepareThenRenderImage = async (details, invert, path) => {
     })
 }
 
+const outputImageKitty = (imageBuffer) => {
+  const b64 = imageBuffer.toString("base64")
+  const chunkSize = 4096
+  for (let i = 0; i < b64.length; i += chunkSize) {
+    const chunk = b64.slice(i, i + chunkSize)
+    const isFirst = i === 0
+    const isLast = i + chunkSize >= b64.length
+    const header = isFirst ? "a=T,f=100," : ""
+    const more = isLast ? "m=0" : "m=1"
+    process.stdout.write(`\x1b_G${header}${more};${chunk}\x1b\\`)
+  }
+  process.stdout.write("\n")
+}
+
 export const outputImage = async (path) => {
   const image = readFileSync(path)
-  console.log(ansiEscapes.image(image))
+  const term = process.env.TERM_PROGRAM ?? ""
+  if (term === "iTerm.app") {
+    console.log(ansiEscapes.image(image))
+  } else {
+    outputImageKitty(image)
+  }
 }
