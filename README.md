@@ -83,16 +83,24 @@ Follow a link by its numeric label
 bro [numeric label]
 ```
 
-Override the default width of the virtual browser's viewport
+Clear the history (deletes data and screenshot from the cache)
 
 ```
-bro -w [width]
+bro clear
 ```
 
-Invert the labels (to be more readable against dark backgrounds)
+## Flags
+
+Override the default width of the virtual browser's viewport. Uses last URL if URL omitted.
 
 ```
-bro -i
+bro -w [width] [url]
+```
+
+Invert the labels (to be more readable against dark backgrounds). Uses last URL if URL omitted.
+
+```
+bro -i [url]
 ```
 
 ## Philosophy
