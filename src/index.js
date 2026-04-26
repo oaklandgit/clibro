@@ -2,6 +2,7 @@
 
 import meow from "meow"
 import { mkdirSync } from "fs"
+import { unlink } from "fs/promises"
 import { takeScreenshot } from "./grab"
 import { prepareThenRenderImage } from "./render"
 
@@ -32,6 +33,7 @@ Usage:
 
   $ bro <url>     Present a screenshot of the url in the terminal. Must include http:// or https://
   $ bro <number>  Follow a link by the numbered label in the previous screenshot
+  $ bro clear     Clear history (deletes saved URL, links, and screenshot)
 
 Flags:
 
@@ -64,8 +66,22 @@ const urlPattern =
   /(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?\/[a-zA-Z0-9]{2,}|((https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z]{2,}(\.[a-zA-Z]{2,})(\.[a-zA-Z]{2,})?)|(https:\/\/www\.|http:\/\/www\.|https:\/\/|http:\/\/)?[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}\.[a-zA-Z0-9]{2,}(\.[a-zA-Z0-9]{2,})?/g
 const labelPattern = /[0-9]/g
 
+const handleClear = async () => {
+  await Promise.all([
+    Bun.file(DATA_PATH)
+      .exists()
+      .then((exists) => exists && unlink(DATA_PATH)),
+    Bun.file(SCREENSHOT)
+      .exists()
+      .then((exists) => exists && unlink(SCREENSHOT)),
+  ])
+  console.log("History cleared.")
+}
+
 const handleUserInput = (input) => {
-  if (urlPattern.test(input)) {
+  if (input === "clear") {
+    handleClear()
+  } else if (urlPattern.test(input)) {
     handleUrl(input)
   } else if (labelPattern.test(input)) {
     handleLink(input)
