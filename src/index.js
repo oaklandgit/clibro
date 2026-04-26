@@ -1,12 +1,21 @@
 #!/usr/bin/env bun
 
 import meow from "meow"
+import { mkdirSync } from "fs"
 import { takeScreenshot } from "./grab"
 import { prepareThenRenderImage } from "./render"
 
 const Spinner = require("cli-spinner").Spinner
 
-const SCREENSHOT = "screenshot.png"
+const HOME = process.env.HOME
+const DATA_DIR = `${HOME}/Library/Application Support/clibro`
+const CACHE_DIR = `${HOME}/Library/Caches/clibro`
+const DATA_PATH = `${DATA_DIR}/data.json`
+const SCREENSHOT = `${CACHE_DIR}/screenshot.png`
+
+mkdirSync(DATA_DIR, { recursive: true })
+mkdirSync(CACHE_DIR, { recursive: true })
+
 const HELP_TEXT = `
 
  ######  ##       #### ########  ########   #######  
@@ -22,7 +31,7 @@ Requires:         Any graphics-capable terminal on macOS (iTerm2, Kitty, Ghostty
 Usage:
 
   $ bro <url>     Present a screenshot of the url in the terminal. Must include http:// or https://
-  $ bro <number>  Follow a link by the numbered label in the previous screenshot        
+  $ bro <number>  Follow a link by the numbered label in the previous screenshot
 
 Flags:
 
@@ -66,8 +75,7 @@ const handleUserInput = (input) => {
 }
 
 const handleEmpty = async () => {
-  const path = "data.json"
-  const file = Bun.file(path)
+  const file = Bun.file(DATA_PATH)
   try {
     const data = await file.json()
     handleUrl(data.visited)
@@ -83,7 +91,12 @@ const handleUrl = async (url) => {
   spinner.start()
 
   try {
-    const pageDetails = await takeScreenshot(url, SCREENSHOT, cli.flags.width)
+    const pageDetails = await takeScreenshot(
+      url,
+      SCREENSHOT,
+      DATA_PATH,
+      cli.flags.width,
+    )
     await prepareThenRenderImage(pageDetails, cli.flags.invert, SCREENSHOT)
     console.log()
     spinner.stop()
@@ -101,9 +114,7 @@ const handleLink = async (num) => {
   spinner.setSpinnerString("|/-\\")
   spinner.start()
 
-  const path = "data.json"
-  const data = Bun.file(path)
-  const contents = await data.json()
+  const contents = await Bun.file(DATA_PATH).json()
   spinner.stop()
 
   if (contents.links[num].url) {

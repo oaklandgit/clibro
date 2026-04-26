@@ -113,10 +113,12 @@ Clibro aims to be a CLI tool that:
 
 ### Q: Where does Clibro store its data?
 
-Clibro creates two files in the directory you set up initially. For example, if you cloned the repo to `~/clibro`, then Clibro will store its data there.
+Clibro follows macOS conventions and stores its data in two standard locations:
 
-- `screenshot.png` - an image of the last-visited page
-- `data.json` - a file storing the last-visited url and its links
+- `~/Library/Application Support/clibro/data.json` - the last-visited URL and its links
+- `~/Library/Caches/clibro/screenshot.png` - an image of the last-visited page
+
+Both directories are created automatically on first run.
 
 ### Q: This looks hella useful! Can I contribute?
 

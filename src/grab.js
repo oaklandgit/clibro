@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer"
 
-export const takeScreenshot = async (url, path, width) => {
+export const takeScreenshot = async (url, path, dataPath, width) => {
   const pageDetails = {
     visited: url,
     links: [],
@@ -26,7 +26,7 @@ export const takeScreenshot = async (url, path, width) => {
       })),
     )
 
-    await Bun.write("data.json", JSON.stringify(pageDetails))
+    await Bun.write(dataPath, JSON.stringify(pageDetails))
     return pageDetails
   } finally {
     browser.close()
